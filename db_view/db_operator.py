@@ -1,8 +1,11 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-import pickle
+import pickle,setting
 
-def add_obj(object):
+BASE_PATH = setting.BASE_PATH
+
+
+class add_obj(object):
     obj_in_db = False
     try:
         with open('./db_files/schools.db', 'rb+') as old_fp:
@@ -19,6 +22,10 @@ def add_obj(object):
                 old_text.append(object)
                 pickle.dump(old_text,new_fp)
     except EOFError:
+        print('这是空文件导致需要执行此处')
+        with open('./db_files/schools.db', 'wb') as new_fp:
+            pickle.dump([object], new_fp)
+    except FileNotFoundError:
         print('这是空文件导致需要执行此处')
         with open('./db_files/schools.db', 'wb') as new_fp:
             pickle.dump([object], new_fp)
