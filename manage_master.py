@@ -4,15 +4,17 @@ from db_view import database_info
 from db_view import db_operator
 
 
-def add_obj(object):
-    if object == 'school_manage':
+def add_obj(obj_db):
+    if obj_db == 'school_manage':
         print('请输入以下内容：学校名称、学校地址、服务电话')
         school_name = input('学校名称：')
         school_addr = input('学校地址：')
         school_tel = input('服务电话：')
         add_school = database_info.School(school_name, school_addr, school_tel)
-        db_operator.add_obj(add_school)
-    elif object == 'teacher_manage':
+        result = db_operator.operator_db.add_obj(add_school,obj_db)
+        if not result:
+            print('数据对象已存在')
+    elif obj_db == 'teacher_manage':
         print('请输入以下内容：学生姓名、性别、住址、年龄、联系电话')
         teacher_name = input()
         teacher_sex = input()
@@ -21,7 +23,7 @@ def add_obj(object):
         teacher_tel = input()
         teacher_salary = input()
 
-    elif object == 'student_manage':
+    elif obj_db == 'student_manage':
         print('请输入以下内容：学生姓名、性别、住址、年龄、联系电话')
         stu_name = input()
         stu_sex = input()
