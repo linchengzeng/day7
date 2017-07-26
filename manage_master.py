@@ -1,39 +1,10 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from db_view import database_info
+from information_operator import add_infomation
 from db_view import db_operator
 
 
-def add_obj(obj_db):
-    if obj_db == 'school_manage':
-        print('请输入以下内容：学校名称、学校地址、服务电话')
-        school_name = input('学校名称：')
-        school_addr = input('学校地址：')
-        school_tel = input('服务电话：')
-        add_school = database_info.School(school_name, school_addr, school_tel)
-        result = db_operator.operator_db.add_obj(add_school,obj_db)
-        if not result:
-            print('数据对象已存在')
-    elif obj_db == 'teacher_manage':
-        print('请输入以下内容：学生姓名、性别、住址、年龄、联系电话')
-        teacher_name = input()
-        teacher_sex = input()
-        teacher_addr = input()
-        teacher_age = input()
-        teacher_tel = input()
-        teacher_salary = input()
 
-    elif obj_db == 'student_manage':
-        print('请输入以下内容：学生姓名、性别、住址、年龄、联系电话')
-        stu_name = input()
-        stu_sex = input()
-        stu_addr = input()
-        stu_age = input()
-        stu_tel = input()
-
-
-def editor_obj(object):
-    print('修改',object)
 
 def dele_obj(object):
     print('删除', object)
@@ -41,6 +12,8 @@ def dele_obj(object):
 def search_obj(object):
     print('查询', object)
 
+def last(object):
+    print('返回上级操作')
 
 menu_dict = {
     'school_manage':'学校',
@@ -52,21 +25,25 @@ option_menu_desc = {
     '1：添加':'add_obj',
     '2：修改':'editor_obj',
     '3：删除':'dele_obj',
-    '4：查询':'search_obj'
+    '4：查询':'search_obj',
+    '5：返回上级操作':'last'
 }
 
 option_menu_dict = {
-    '1':add_obj,
+    '1':add_infomation.Get_info.add_obj,
     '2':editor_obj,
     '3':dele_obj,
-    '4':search_obj
+    '4':search_obj,
+    '5':last
 }
 
 
 def manage_info(user_select_menu):
-    print('用户选择管理：%s管理'%menu_dict[user_select_menu])
+    print()
+    print('\033[30;1m您现在操作的是%s管理选项\033[0m'%menu_dict[user_select_menu])
     for sub_menu in option_menu_desc.keys():
         print('%s%s'%(sub_menu,menu_dict[user_select_menu]))
+    print()
     option_select = input('\033[31;1m请选择您需要的操作>>：\033[0m')
     if option_select in option_menu_dict:
         option_menu_dict[option_select](user_select_menu)
