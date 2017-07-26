@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from day7.db_view import database_info
-from day7.db_view import db_operator
+from db_view import database_info
+from db_view import db_operator
 
 
 def add_obj(object):

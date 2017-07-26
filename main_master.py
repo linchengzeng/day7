@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from  day7 import manage_master
+import manage_master
 
 user_data = {
     'username':'',
