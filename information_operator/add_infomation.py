@@ -1,8 +1,7 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from db_view import database_info
-from db_view import db_operator
-
+from db_view import database_info,db_operator
+import manage_master
 
 class Add_info(object):
 
@@ -21,7 +20,7 @@ class Add_info(object):
             school_addr = input('学校地址：')
             school_tel = input('服务电话：')
             add_school = database_info.School(school_id,school_name, school_addr, school_tel)
-            result = db_operator.operator_db.add_obj(add_school,obj_db)
+            result = db_operator.operator_db.add_obj_to_db(add_school, obj_db)
 
         elif obj_db == 'teacher_manage':
             print('请输入以下内容：教师ID、教师姓名、性别、住址、年龄、联系电话')
@@ -44,5 +43,8 @@ class Add_info(object):
         if not result:
             print('\033[31;1m此%s已存在,请检查后重新输入。\033[0m'%Add_info.menu_dict[obj_db])
             print()
-            import manage_master
+
+            manage_master.manage_info(obj_db)
+        else:
+            print('添加成功!')
             manage_master.manage_info(obj_db)

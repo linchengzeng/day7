@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from information_operator import add_infomation
-from db_view import db_operator
+from information_operator import add_infomation,editor_infomation
 
 
 
@@ -30,8 +29,8 @@ option_menu_desc = {
 }
 
 option_menu_dict = {
-    '1':add_infomation.Get_info.add_obj,
-    '2':editor_obj,
+    '1':add_infomation.Add_info.add_obj,
+    '2':editor_infomation.Editor_info.editor_obj,
     '3':dele_obj,
     '4':search_obj,
     '5':last

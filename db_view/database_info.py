@@ -7,10 +7,11 @@ class School():
         :param school_addr: 学校地址
         :param school_tel: 服务电话
         '''
+        self.School_ID = school_id
         self.School_Name = school_name
         self.School_Addr = school_addr
         self.School_Tel = school_tel
-        self.School_ID = school_id
+
 
 class Course():
     '''
