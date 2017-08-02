@@ -5,40 +5,36 @@
 from db_view import db_operator,database_info
 from information_operator import public_search
 
-import setting,style
+import setting,style,main_master
 
 
 BASE_PATH = setting.BASE_PATH
 
 class Editor_info():
     # 更新学校名称
-    def editor_school_name(obj,school_id,new_name,obj_table):
+    def update_school_info(obj, school_id, obj_rank,new_val, obj_table):
         #读取所有信息
         all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
         for line in all_obj_info:
             #判断是本次需要修改的信息ID时进行删除
             if school_id == line.School_ID:
                 all_obj_info.remove(line)
+
         #新建一个新的对象，并将新的值写入新对象
-        new_obj = database_info.School(obj.School_ID,new_name,obj.School_Addr,obj.School_Tel)
+        if obj_rank == 'School_Name':
+            #如果是改名称
+            new_obj = database_info.School(obj.School_ID, new_val, obj.School_Addr, obj.School_Tel)
+        elif obj_rank =='School_Addr':
+            #改地址
+            new_obj = database_info.School(obj.School_ID, obj.School_Name, new_val,  obj.School_Tel)
+        elif obj_rank == 'School_Tel':
+            #改电话
+            new_obj = database_info.School(obj.School_ID, obj.School_Name, obj.School_Addr, new_val)
+
         #将更新后的对象添加到原来的数据库表中
         all_obj_info.append(new_obj)
         #数据持久化到文件中
         db_operator.operator_db.fulsh_db(all_obj_info,obj_table)
-
-    # 更新学校地址
-    def editor_school_addr(obj,school_id,new_addr,obj_table):
-        obj.School_Addr = new_addr
-
-    # 更新学校电话
-    def editor_school_tel(self,new_tel):
-        self.School_Tel = new_tel
-
-    edit_school_attr ={
-        '1': editor_school_name,
-        '2': editor_school_addr,
-        '3': editor_school_tel
-    }
 
     # 更新学校信息
     def editor_school_obj(obj_table):
@@ -57,9 +53,13 @@ class Editor_info():
                 print('*******************')
                 obj_info = line
             print(style.school_menu_desc)
-            edit_attr = input('\033[31;1m请输入您需要修改的信息\033[0m')
-            if edit_attr in style.school_attr:
+            update_attr = input('\033[31;1m请输入您需要修改的信息\033[0m')
+            if update_attr in style.school_attr:
                 new_val = input('\033[31;1m请输入新值>>：\033[0m')
-                Editor_info.edit_school_attr[edit_attr](obj_info,obj_info.School_ID,new_val,obj_table)
+                rank_val = style.school_attr[update_attr]
+                try:
+                    Editor_info.update_school_info(obj_info,obj_info.School_ID,rank_val,new_val,obj_table)
+                except:
+                    print('系统异常，更新信息失败，请联系管理员！')
 
 

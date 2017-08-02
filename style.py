@@ -1,5 +1,13 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
+
+menu = u'''
+    1：学员视图
+    2：讲师视图
+    3：管理视图
+    4：退出
+'''
+
 role_desc_dict = {
     'school_manage':'学校',
     'teacher_manage':'讲师',

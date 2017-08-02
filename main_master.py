@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-import manage_master
+import manage_master,style
 
 user_data = {
     'username':'',
@@ -42,34 +42,27 @@ def teacher_view(args,kwargs):
 '''
 @authentication(auth_val = 'manage_view')
 def manage_view(args,kwargs):
-    menu = u'''
-    1：学校管理
-    2：讲师管理
-    3：学生管理
-    4：返回上级菜单
-    '''
+
     menu_dict = {
         '1': 'school_manage',
         '2': 'teacher_manage',
         '3': 'student_manage',
         '4': logout
     }
-    print(menu)
-    user_select_menu = input('\033[31;1m请输入您需要进入的管理界面>>:\033[0m')
-    if user_select_menu in menu_dict:
-        manage_master.manage_info(menu_dict[user_select_menu])
+    while True:
+        print(style.menu_desc)
+        user_select_menu = input('\033[31;1m请输入您需要进入的管理界面>>:\033[0m')
+        if user_select_menu in menu_dict:
+            manage_master.manage_info(menu_dict[user_select_menu])
 
 
 def logout():
     print('本次使用结束，欢迎您再次使用本系统!')
     exit()
 
-menu = u'''
-    1：学员视图
-    2：讲师视图
-    3：管理视图
-    4：退出
-'''
+
+
+print(style.menu)
 
 menu_dict = {
     '1': student_view,
@@ -77,8 +70,6 @@ menu_dict = {
     '3': manage_view,
     '4': logout
 }
-
-print(menu)
 
 user_select_menu = input('\033[31;1m请输入您需要进入的视图>>:\033[0m')
 if user_select_menu in menu_dict:
