@@ -14,5 +14,7 @@ class Search_info():
         '''
         sql = 'select * from ' + obj_db_table + 'where School_ID = ' + obj_id
         print(sql)
-        result = db_operator.operator_db.search_db(obj_id,obj_db_table)
+        result = db_operator.operator_db.search_id_in_db(obj_id, obj_db_table)
         print(result)
+
+

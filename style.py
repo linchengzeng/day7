@@ -27,3 +27,16 @@ menu_num_dict = {
         '3': 'student_manage',
         '4': 'logout'
     }
+
+school_menu_desc = u'''
+    1:学校名称
+    2:学校地址
+    3:联系电话
+'''
+
+school_attr = {
+    '1':'School_Name',
+    '2':'School_Addr',
+    '3':'School_Tel'
+}
+

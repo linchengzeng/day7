@@ -30,7 +30,7 @@ option_menu_desc = {
 
 option_menu_dict = {
     '1':add_infomation.Add_info.add_obj,
-    '2':editor_infomation.Editor_info.editor_obj,
+    '2':editor_infomation.Editor_info.editor_school_obj,
     '3':dele_obj,
     '4':search_obj,
     '5':last
