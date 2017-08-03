@@ -1,12 +1,7 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from information_operator import add_infomation,editor_infomation
-
-
-
-
-def dele_obj(object):
-    print('删除', object)
+from information_operator import add_infomation,update_school_infomation,dele_infomation,search_infomation
+import main_master
 
 def search_obj(object):
     print('查询', object)
@@ -29,20 +24,26 @@ option_menu_desc = {
 }
 
 option_menu_dict = {
-    '1':add_infomation.Add_info.add_obj,
-    '2':editor_infomation.Editor_info.editor_school_obj,
-    '3':dele_obj,
-    '4':search_obj,
-    '5':last
+    '1': add_infomation.Add_info.add_obj,
+    '2': update_school_infomation.Editor_info.editor_school_obj,
+    '3': dele_infomation.Dele_school_info.dele_school_obj,
+    '4': search_infomation.Search_info.search_all_obj,
+    '5': last
 }
 
 
 def manage_info(user_select_menu):
+    '''
+    :param user_select_menu: 用户要操作的表格
+    :return:
+    '''
     print()
     print('\033[30;1m您现在操作的是%s管理选项\033[0m'%menu_dict[user_select_menu])
+    # 遍历选项卡（操作菜单）
     for sub_menu in option_menu_desc.keys():
         print('%s%s'%(sub_menu,menu_dict[user_select_menu]))
     print()
+    # 用户选的是添加、修改、删除、查询、返回上级等操作
     option_select = input('\033[31;1m请选择您需要的操作>>：\033[0m')
     if option_select in option_menu_dict:
         option_menu_dict[option_select](user_select_menu)

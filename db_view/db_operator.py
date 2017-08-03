@@ -40,6 +40,18 @@ class operator_db(object):
         else:
             return 'fail'
 
+    def search_all_table(obj_db_table):
+        db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
+        with open(db_file, 'rb+') as table_obj:
+            table_info = pickle.load(table_obj)
+        result = []
+        for line in table_info:
+            result.append(line)
+        if len(result) != 0:
+            return result
+        else:
+            return 'fail'
+
     def fulsh_db(obj_val_all, obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
         with open(db_file, 'wb') as new_fp:
