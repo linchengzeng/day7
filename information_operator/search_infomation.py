@@ -6,7 +6,7 @@ BASE_FILE = setting.BASE_PATH
 
 class Search_info():
 
-    def search_obj_info(obj_id,obj_db_table):
+    def search_id_in_table(obj_id, obj_db_table):
         '''
         :param obj_id:数据ID
         :param obj_db_table:表名
@@ -18,15 +18,32 @@ class Search_info():
         print(result)
 
 
-    def search_all_obj(obj_db_table):
+    def search_all_obj(db_table):
         '''
         :param obj_id:数据ID
-        :param obj_db_table:表名
+        :param db_table:表名
         :return:
         '''
-        obj_list = db_operator.operator_db.search_all_table(obj_db_table)
-        if obj_list == 'fail':
+        search_obj_list = db_operator.operator_db.search_all_table(db_table)
+        if search_obj_list == 'fail':
             print('查谗失败或数据为空！请联系管理员！')
         else:
-            for obj_info in obj_list:
-                print(obj_info)
+            if db_table == 'school_manage':
+                for school_obj_info in search_obj_list:
+                    print('学校ID（唯一）：%s' % school_obj_info.ID)
+                    print('学校名称：%s' % school_obj_info.School_Name)
+                    print('学校地址：%s' % school_obj_info.School_Addr)
+                    print('联系电话：%s' % school_obj_info.School_Tel)
+                    print('************************')
+            elif db_table == 'teacher_manage':
+                for teacher_obj_info in search_obj_list:
+                    print(teacher_obj_info)
+                    print('search_infomation.py   line in 41')
+            elif db_table == 'course_manage':
+                for course_obj_info in search_obj_list:
+                    print(course_obj_info)
+                    print('search_infomation.py   line in 45')
+            elif db_table == 'student_manage':
+                for student_obj_info in search_obj_list:
+                    print(student_obj_info)
+                    print('search_infomation.py   line in 49')

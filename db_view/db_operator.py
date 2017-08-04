@@ -12,7 +12,7 @@ class operator_db(object):
                 old_text = pickle.load(table_obj)
             for line in old_text:
                 #ID存在表示信息已存在
-                if obj_val.School_ID == line.School_ID:
+                if obj_val.ID == line.ID:
                     # print('数据对象已存在')
                     return False
             with open(db_file,'wb') as new_fp:
@@ -32,7 +32,7 @@ class operator_db(object):
         result = []
         for line in table_info:
             # ID存在表示信息已存在
-            if obj_id == line.School_ID:
+            if obj_id == line.ID:
                 print('查到数据对象')
                 result.append(line)
         if len(result) != 0:

@@ -3,7 +3,7 @@
 
 from information_operator import public_search
 from db_view import db_operator
-import main_master,time
+import main_master, time
 
 
 class Dele_school_info():
@@ -17,7 +17,7 @@ class Dele_school_info():
         try:
             for line in all_obj_info:
                 # 判断是本次需要修改的信息ID时进行删除
-                if del_obj_id == line.School_ID:
+                if del_obj_id == line.ID:
                     all_obj_info.remove(line)
                     # time.sleep(0.6)是装饰用，无任何实际意义
                     time.sleep(0.6)

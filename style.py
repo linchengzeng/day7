@@ -9,16 +9,18 @@ menu = u'''
 '''
 
 role_desc_dict = {
-    'school_manage':'学校',
-    'teacher_manage':'讲师',
-    'student_manage':'学生'
+    'school_manage': '学校',
+    'teacher_manage': '讲师',
+    'course_manage': '课程',
+    'student_manage': '学生'
 }
 
 menu_desc = u'''
    1：学校管理
    2：讲师管理
-   3：学生管理
-   4：返回上级菜单
+   3：课程管理
+   4：学生管理
+   5：返回上级菜单
    '''
 
 option_menu_desc_dict = {
@@ -32,8 +34,9 @@ option_menu_desc_dict = {
 menu_num_dict = {
         '1': 'school_manage',
         '2': 'teacher_manage',
-        '3': 'student_manage',
-        '4': 'logout'
+        '3': 'course_manage',
+        '4': 'student_manage',
+        '5': 'logout'
     }
 
 school_menu_desc = u'''
