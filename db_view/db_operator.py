@@ -29,16 +29,16 @@ class operator_db(object):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
         with open(db_file, 'rb+') as table_obj:
             table_info = pickle.load(table_obj)
-        result = []
+        result = None
         for line in table_info:
             # ID存在表示信息已存在
             if obj_id == line.ID:
                 print('查到数据对象')
-                result.append(line)
-        if len(result) != 0:
-            return result
-        else:
+                result = line
+        if result is None:
             return 'fail'
+        else:
+            return result
 
     def search_all_table(obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'

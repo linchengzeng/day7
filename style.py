@@ -7,13 +7,12 @@ menu = u'''
     3：管理视图
     4：退出
 '''
-
-role_desc_dict = {
-    'school_manage': '学校',
-    'teacher_manage': '讲师',
-    'course_manage': '课程',
-    'student_manage': '学生'
-}
+menu_dict = {
+        'school_manage': '学校',
+        'teacher_manage': '讲师',
+        'course_manage': '课程',
+        'student_manage': '学生'
+    }
 
 menu_desc = u'''
    1：学校管理

@@ -46,8 +46,9 @@ def manage_view(args,kwargs):
     menu_dict = {
         '1': 'school_manage',
         '2': 'teacher_manage',
-        '3': 'student_manage',
-        '4': logout
+        '3': 'course_manage',
+        '4': 'student_manage',
+        '5': logout
     }
     while True:
         print(style.menu_desc)
@@ -59,7 +60,6 @@ def manage_view(args,kwargs):
 def logout():
     print('本次使用结束，欢迎您再次使用本系统!')
     exit()
-
 
 
 print(style.menu)

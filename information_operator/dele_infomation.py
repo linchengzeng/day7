@@ -6,7 +6,7 @@ from db_view import db_operator
 import main_master, time
 
 
-class Dele_school_info():
+class Dele_obj_info():
 
     def dele_school_obj(obj_table):
         # 用于标记对象存在数据库中

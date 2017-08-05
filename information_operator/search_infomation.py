@@ -12,10 +12,10 @@ class Search_info():
         :param obj_db_table:表名
         :return:
         '''
-        sql = 'select * from ' + obj_db_table + 'where School_ID = ' + obj_id
-        print(sql)
-        result = db_operator.operator_db.search_id_in_db(sql)
-        print(result)
+        # sql = 'select * from ' + obj_db_table + 'where School_ID = ' + obj_id
+        # print(sql)
+        result = db_operator.operator_db.search_id_in_db(obj_id, obj_db_table)
+        return result
 
 
     def search_all_obj(db_table):
