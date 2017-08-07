@@ -38,7 +38,7 @@ menu_num_dict = {
         '5': 'logout'
     }
 
-school_menu_desc = u'''
+school_menu_arrt = u'''
     1:学校名称
     2:学校地址
     3:联系电话
@@ -50,3 +50,13 @@ school_attr = {
     '3':'School_Tel'
 }
 
+course_attr = {
+    '1':'Course_Name',
+    '2':'Course_Period',
+    '3':'Course_Cost'
+}
+course_menu_arrt = u'''
+    1:课程名称
+    2:课程周期
+    3:课程费用
+'''

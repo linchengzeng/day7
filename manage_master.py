@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from information_operator import add_infomation,update_school_infomation,dele_infomation,search_infomation
+from information_operator import add_infomation,update_obj_infomation,dele_infomation,search_infomation
 import main_master,style
 
 def search_obj(object):
@@ -19,7 +19,7 @@ option_menu_desc = {
 
 option_menu_dict = {
     '1': add_infomation.Add_info.add_obj,
-    '2': update_school_infomation.Editor_info.editor_school_obj,
+    '2': update_obj_infomation.Editor_info.update_obj_info,
     '3': dele_infomation.Dele_obj_info.dele_school_obj,
     '4': search_infomation.Search_info.search_all_obj,
     '5': last

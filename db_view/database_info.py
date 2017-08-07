@@ -14,17 +14,19 @@ class School():
 
 
 class Course():
-    def __init__(self, ID, course_name, course_period, course_cost):
+    def __init__(self, ID, course_name, course_period, course_cost, School):
         '''
         :param ID:课程ID
         :param course_name:课程名称
         :param course_period:课程周期
         :param course_cost:课程费用
+        :param School:开课学校
         '''
+        self.ID = ID
         self.Course_name = course_name
         self.Course_period = course_period
         self.Course_cost = course_cost
-        self.ID = ID
+        self.Course_School = School
 
 class Teacher():
     def __init__(self, ID, teacher_name, teacher_sex, teacher_addr, teacher_age, teacher_tel, teacher_salary, School):
