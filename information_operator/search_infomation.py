@@ -28,22 +28,30 @@ class Search_info():
         if search_obj_list == 'fail':
             print('查谗失败或数据为空！请联系管理员！')
         else:
+            print('********查询结果*********')
             if db_table == 'school_manage':
                 for school_obj_info in search_obj_list:
+                    print('************************')
                     print('学校ID（唯一）：%s' % school_obj_info.ID)
                     print('学校名称：%s' % school_obj_info.School_Name)
                     print('学校地址：%s' % school_obj_info.School_Addr)
                     print('联系电话：%s' % school_obj_info.School_Tel)
-                    print('************************')
+
             elif db_table == 'teacher_manage':
                 for teacher_obj_info in search_obj_list:
                     print(teacher_obj_info)
                     print('search_infomation.py   line in 41')
             elif db_table == 'course_manage':
                 for course_obj_info in search_obj_list:
-                    print(course_obj_info)
-                    print('search_infomation.py   line in 45')
+                    print('************************')
+                    print('课程ID（唯一）：%s' % course_obj_info.ID)
+                    print('课程名称：%s' % course_obj_info.Course_name)
+                    print('课程周期：%s' % course_obj_info.Course_period)
+                    print('课程费用：%s' % course_obj_info.Course_cost)
+                    print('开课地址：%s' % course_obj_info.Course_School.School_Addr)
+                    print('联系电话：%s' % course_obj_info.Course_School.School_Tel)
             elif db_table == 'student_manage':
                 for student_obj_info in search_obj_list:
                     print(student_obj_info)
-                    print('search_infomation.py   line in 49')
+                    print('search_infomation.py   line in 52')
+            print('**********查询结束**********')

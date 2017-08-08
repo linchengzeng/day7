@@ -51,6 +51,7 @@ def manage_view(args,kwargs):
         '5': logout
     }
     while True:
+        print('\033[30;1m\n您现在所在位置：管理视图\033[0m')
         print(style.menu_desc)
         user_select_menu = input('\033[31;1m请输入您需要进入的管理界面>>:\033[0m')
         if user_select_menu in menu_dict:

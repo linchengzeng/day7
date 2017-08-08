@@ -64,18 +64,18 @@ class Add_info(object):
         result = db_operator.operator_db.add_obj_to_db(add_course, obj_table)
         return result
 
+    # 添加教师信息
     def add_teacher_obj(obj_table):
         print('\n\033[30;1m请先输入教师所属\033[0m\033[31;1m学校的ID\033[0m\033[30;1m，再输入教师的其他信息！\033[0m')
         school_id = input('请输入学校ID：')
         school_obj = search_infomation.Search_info.search_id_in_table(school_id, 'school_manage')
-        if school_obj != 'fail':
+        if school_obj == 'Fail':
             print('您输入的学校ID有误，请查询后再操作！')
             return main_master.manage_view
         else:
-            print(school_obj.ID)
             print(school_obj.School_Name)
         print('\033[31;1m请输入以下内容：教师ID、教师姓名、性别、住址、年龄、联系电话、月薪\033[0m')
-        teacher_id = input('教师ID：')
+        teacher_id = input('教师ID(唯一)：')
         search_teacher_id_result = search_infomation.Search_info.search_id_in_table(teacher_id, obj_table)
         if search_teacher_id_result == 'Fail':
             print('\033[31;1m此ID已存在，请查询后再操作！\033[0m')

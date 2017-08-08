@@ -13,7 +13,7 @@ class operator_db(object):
             with open(db_file,'wb') as new_fp:
                 old_text.append(obj_val)
                 pickle.dump(old_text,new_fp)
-            return True
+            return 'Success'
         except (EOFError,FileNotFoundError):
             print('这是空文件导致需要执行此处')
             with open(db_file, 'wb') as new_fp:
@@ -22,14 +22,18 @@ class operator_db(object):
 
     def search_id_in_db(obj_id, obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
-        with open(db_file, 'rb+') as table_obj:
-            table_info = pickle.load(table_obj)
-        result = 'Fail'
-        for line in table_info:
-            # ID存在表示信息已存在
-            if obj_id == line.ID:
-                print('查到数据对象')
-                result = line
+        try:
+            with open(db_file, 'rb+') as table_obj:
+                table_info = pickle.load(table_obj)
+            result = 'Fail'
+            for line in table_info:
+                # ID存在表示信息已存在
+                if obj_id == line.ID:
+                    # print('查到数据对象')
+                    result = line
+        except (EOFError,FileNotFoundError):
+            print('这是空文件导致需要执行此处')
+            return 'Success'
         return result
 
     def search_all_table(obj_db_table):
