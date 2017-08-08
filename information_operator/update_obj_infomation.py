@@ -71,7 +71,7 @@ class Editor_info():
             print('联系电话：%s' % obj_info.Course_School.School_Tel)
             print(style.course_menu_arrt)
             update_attr = input('\033[31;1m请输入您需要修改的信息\033[0m')
-            if update_attr in style.school_attr:
+            if update_attr in style.course_attr:
                 new_val = input('\033[31;1m请输入新值>>：\033[0m')
                 rank_name = style.course_attr[update_attr]
                 try:
@@ -84,7 +84,7 @@ class Editor_info():
                     print('********课程额外信息**********')
                     print('开课地址：%s' % new_obj_info.Course_School.School_Addr)
                     print('联系电话：%s' % new_obj_info.Course_School.School_Tel)
-                except:
+                except EOFError:
                     print('系统异常，更新信息失败，请联系管理员！')
         return main_master.manage_view
 
@@ -123,13 +123,13 @@ class Editor_info():
         # 新建一个新的对象，并将新的值写入新对象
         if rank_name == 'Course_Name':
             # 改课程名称
-            new_obj = database_info.Course(obj_info.ID, new_val, obj_info.Course_Period, obj_info.Course_Cost, obj_info.Course_School)
+            new_obj = database_info.Course(obj_info.ID, new_val, obj_info.Course_period, obj_info.Course_cost, obj_info.Course_School)
         elif rank_name == 'Course_Period':
             # 改地址
-            new_obj = database_info.Course(obj_info.ID, obj_info.Course_Name, new_val, obj_info.Course_Cost, obj_info.Course_School)
+            new_obj = database_info.Course(obj_info.ID, obj_info.Course_name, new_val, obj_info.Course_cost, obj_info.Course_School)
         elif rank_name == 'Course_Cost':
             # 改电话
-            new_obj = database_info.Course(obj_info.ID, obj_info.Course_Name, obj_info.Course_Period, new_val, obj_info.Course_School)
+            new_obj = database_info.Course(obj_info.ID, obj_info.Course_name, obj_info.Course_period, new_val, obj_info.Course_School)
         # 将更新后的对象添加到原来的数据库表中
         all_obj_info.append(new_obj)
         # 数据持久化到文件中
