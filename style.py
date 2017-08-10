@@ -41,11 +41,6 @@ menu_num_dict = {
         '6': 'logout'
     }
 
-school_menu_arrt = u'''
-    1:学校名称
-    2:学校地址
-    3:联系电话
-'''
 
 school_attr = {
     '1':'School_Name',
@@ -58,8 +53,35 @@ course_attr = {
     '2':'Course_Period',
     '3':'Course_Cost'
 }
+
+teacher_arrt = {
+    '1':'Teacher_name',
+    '2':'Teacher_sex',
+    '3':'Teacher_addr',
+    '4':'Teacher_age',
+    '5':'Teacher_tell',
+    '6':'Teacher_salary',
+    '7':'Teach_School'
+}
+
+school_menu_arrt = u'''
+    1:学校名称
+    2:学校地址
+    3:联系电话
+'''
+
 course_menu_arrt = u'''
     1:课程名称
     2:课程周期
     3:课程费用
+'''
+
+teacher_menu_arrt = u'''
+    1：教师名称
+    2：教师性别
+    3：教师地址
+    4：教师年龄
+    5：教师电话
+    6：教师工资
+    7：教师所属学校
 '''
