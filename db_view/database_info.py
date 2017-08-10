@@ -12,6 +12,9 @@ class School():
         self.School_Addr = school_addr
         self.School_Tel = school_tel
 
+    def add_course(self, ID, course_name, course_period, course_cost, School):
+        result = Course( ID, course_name, course_period, course_cost, School)
+        return result
 
 class Course():
     def __init__(self, ID, course_name, course_period, course_cost, School):

@@ -9,6 +9,7 @@ menu = u'''
 '''
 menu_dict = {
         'school_manage': '学校',
+        'classes_manage': '班级',
         'teacher_manage': '讲师',
         'course_manage': '课程',
         'student_manage': '学生'
@@ -16,10 +17,11 @@ menu_dict = {
 
 menu_desc = u'''
    1：学校管理
-   2：讲师管理
-   3：课程管理
-   4：学生管理
-   5：返回上级菜单
+   2：班级管理
+   3：讲师管理
+   4：课程管理
+   5：学生管理
+   6：返回上级菜单
    '''
 
 option_menu_desc_dict = {
@@ -32,10 +34,11 @@ option_menu_desc_dict = {
 
 menu_num_dict = {
         '1': 'school_manage',
-        '2': 'teacher_manage',
-        '3': 'course_manage',
-        '4': 'student_manage',
-        '5': 'logout'
+        '2': 'classes_manage',
+        '3': 'teacher_manage',
+        '4': 'course_manage',
+        '5': 'student_manage',
+        '6': 'logout'
     }
 
 school_menu_arrt = u'''

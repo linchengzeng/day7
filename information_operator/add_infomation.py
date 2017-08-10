@@ -17,6 +17,9 @@ class Add_info(object):
             result = Add_info.add_course_obj(obj_table)
         elif obj_table == 'student_manage':
             result = Add_info.add_student_obj(obj_table)
+        elif obj_table == 'classes_manage':
+            print('this is add_infomation.py in line 21')
+            print('这是添加班级')
         if result == 'Fail':
             print('\033[31;1m此%s已存在,请检查后重新输入。\033[0m' % style.menu_dict[obj_table])
             print()
@@ -60,8 +63,9 @@ class Add_info(object):
         course_name = input('课程名称：')
         course_period = input('课程周期：')
         course_cost = input('课程价格：')
-        add_course = database_info.Course(course_id, course_name, course_period, course_cost, school_obj)
-        result = db_operator.operator_db.add_obj_to_db(add_course, obj_table)
+        # 通过学校添加课程
+        course_obj = database_info.School.add_course(course_id, course_name, course_period, course_cost, school_obj)
+        result = db_operator.operator_db.add_obj_to_db(course_obj, obj_table)
         return result
 
     # 添加教师信息

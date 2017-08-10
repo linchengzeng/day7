@@ -22,6 +22,9 @@ def authentication(auth_val):
             elif auth_val =='manage_view':
                 print('实现认证装饰manage_view')
                 func(args, kwargs)
+            # elif auth_val == 'classes_view':
+            #     print('实现认证装饰classes_view')
+            #     func(args, kwargs)
         return wapper
     return out_wapper
 
@@ -36,26 +39,21 @@ def student_view(args,kwargs):
 def teacher_view(args,kwargs):
     pass
 
+# @authentication(auth_val = 'classes_view')
+# def classes_manage(args,kwargs):
+#     pass
 
 '''
 管理视图函数
 '''
 @authentication(auth_val = 'manage_view')
 def manage_view(args,kwargs):
-
-    menu_dict = {
-        '1': 'school_manage',
-        '2': 'teacher_manage',
-        '3': 'course_manage',
-        '4': 'student_manage',
-        '5': logout
-    }
     while True:
         print('\033[30;1m\n您现在所在位置：管理视图\033[0m')
         print(style.menu_desc)
         user_select_menu = input('\033[31;1m请输入您需要进入的管理界面>>:\033[0m')
-        if user_select_menu in menu_dict:
-            manage_master.manage_info(menu_dict[user_select_menu])
+        if user_select_menu in style.menu_num_dict:
+            manage_master.manage_info(style.menu_num_dict[user_select_menu])
 
 
 def logout():
