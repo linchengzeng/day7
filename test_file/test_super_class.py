@@ -16,7 +16,7 @@ class Course():
         self.Course_cost = course_cost
         self.Course_School = School
 
-#**********************************
+# **********************************
 
 class School():
     def __init__(self, ID, school_name):

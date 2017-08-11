@@ -111,12 +111,13 @@ class Editor_info():
             print('教师年龄：%s' % obj_info.Teacher_age)
             print('教师电话：%s' % obj_info.Teacher_tell)
             print('教师工资：%s' % obj_info.Teacher_salary)
-            print('教师所属学校：%s' % obj_info.Teach_School)
+            print('教师所属学校：%s' % obj_info.Teacher_School.School_Name)
+            print('********************')
             print(style.teacher_menu_arrt)
-            update_attr = input('\033[31;1m请输入您需要修改的信息\033[0m')
+            update_attr = input('\033[31;1m请输入您需要修改的信息>>：\033[0m')
             if update_attr in style.teacher_arrt:
                 new_val = input('\033[31;1m请输入新值>>：\033[0m')
-                rank_name = style.school_attr[update_attr]
+                rank_name = style.teacher_arrt[update_attr]
                 # 执行更新操作
                 try:
                     new_teacher_info = Editor_info.update_teacher_info(obj_info, obj_info.ID, rank_name, new_val, obj_table)
@@ -193,22 +194,22 @@ class Editor_info():
         # 新建一个新的对象，并将新的值写入新对象
         if rank_name == 'Teacher_name':
             # 改教师名称
-            new_obj = database_info.Teacher(obj_info.ID,new_val,obj_info.Teacher_name,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID,new_val,obj_info.Teacher_name,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teacher_School)
         elif rank_name == 'Teacher_sex':
             # 更改性别
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,new_val,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,new_val,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teacher_School)
         elif rank_name == 'Teacher_addr':
             # 改地址
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,new_val,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,new_val,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teacher_School)
         elif rank_name == 'Teacher_age':
             # 改年龄
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,new_val,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,new_val,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teacher_School)
         elif rank_name == 'Teacher_tell':
             # 改电话
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,new_val,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,new_val,obj_info.Teacher_salary,obj_info.Teacher_School)
         elif rank_name == 'Teacher_salary':
             # 改工资
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,new_val,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,new_val,obj_info.Teacher_School)
         elif rank_name == 'Teach_School':
             # 改学校
             new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,new_val)

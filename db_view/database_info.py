@@ -50,7 +50,7 @@ class Teacher():
         self.Teacher_age = teacher_age
         self.Teacher_tell = teacher_tel
         self.Teacher_salary = teacher_salary
-        self.Teach_School = School   #老师所属学校
+        self.Teacher_School = School   #老师所属学校
         # self.Teach_Cour = Course   #老师所教科目
 
 class Student():
