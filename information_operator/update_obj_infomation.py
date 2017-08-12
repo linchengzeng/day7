@@ -80,7 +80,8 @@ class Editor_info():
                 rank_name = style.course_attr[update_attr]
                 try:
                     # 执行更新操作
-                    new_course_info = Editor_info.update_course_info(obj_info, obj_info.ID, rank_name, new_val, obj_table)
+                    new_course_info = Editor_info.update_course_info(obj_info, obj_info.ID, rank_name, new_val,
+                                                                     obj_table)
                     # 输出更新后的信息
                     print('》》》》更新完成，更新后的信息为》》》》')
                     print('课程ID（唯一）：%s' % new_course_info.ID)
@@ -123,7 +124,8 @@ class Editor_info():
                 rank_name = style.teacher_arrt[update_attr]
                 # 执行更新操作
                 try:
-                    new_teacher_info = Editor_info.update_teacher_info(old_obj_info, old_obj_info.ID, rank_name, new_val, obj_table)
+                    new_teacher_info = Editor_info.update_teacher_info(old_obj_info, old_obj_info.ID, rank_name,
+                                                                       new_val, obj_table)
                     # 输出更新后的信息
                     print('\033[30;1m更新中，请稍侯！！！\033[0m')
                     time.sleep(1)
@@ -176,13 +178,16 @@ class Editor_info():
         # 新建一个新的对象，并将新的值写入新对象
         if rank_name == 'Course_Name':
             # 改课程名称
-            new_obj = database_info.Course(obj_info.ID, new_val, obj_info.Course_period, obj_info.Course_cost, obj_info.Course_School)
+            new_obj = database_info.Course(obj_info.ID, new_val, obj_info.Course_period, obj_info.Course_cost,
+                                           obj_info.Course_School)
         elif rank_name == 'Course_Period':
             # 改地址
-            new_obj = database_info.Course(obj_info.ID, obj_info.Course_name, new_val, obj_info.Course_cost, obj_info.Course_School)
+            new_obj = database_info.Course(obj_info.ID, obj_info.Course_name, new_val, obj_info.Course_cost,
+                                           obj_info.Course_School)
         elif rank_name == 'Course_Cost':
             # 改电话
-            new_obj = database_info.Course(obj_info.ID, obj_info.Course_name, obj_info.Course_period, new_val, obj_info.Course_School)
+            new_obj = database_info.Course(obj_info.ID, obj_info.Course_name, obj_info.Course_period, new_val,
+                                           obj_info.Course_School)
         # 将更新后的对象添加到原来的数据库表中
         all_obj_info.append(new_obj)
         # 数据持久化到文件中
