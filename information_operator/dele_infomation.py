@@ -8,7 +8,7 @@ import main_master, time
 
 class Dele_obj_info():
 
-    def dele_school_obj(obj_table):
+    def dele_id_in_obj(obj_table):
         # 用于标记对象存在数据库中
         del_obj_id_flag = True
         # 读取所有信息

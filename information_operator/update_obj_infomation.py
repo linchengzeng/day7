@@ -5,7 +5,7 @@
 from db_view import db_operator,database_info
 from information_operator import public_search
 
-import setting,style,main_master
+import setting,style,main_master,time
 
 BASE_PATH = setting.BASE_PATH
 
@@ -96,31 +96,38 @@ class Editor_info():
 
     # 更新前后的教师信息
     def edit_teacher_info(obj_table):
-        print('修改%s信息'% style.menu_dict[obj_table])
+        print('\033[30;1m您现在操作的是修改%s信息\033[0m'% style.menu_dict[obj_table])
         edit_obj_id = input('\033[31;1m请输入您需要修改的%s的ID>>：\033[0m' % style.menu_dict[obj_table])
         # 查询此ID是否存在
-        obj_info = db_operator.operator_db.search_id_in_db(edit_obj_id, obj_table)
-        if obj_info == 'Fail':
+        old_obj_info = db_operator.operator_db.search_id_in_db(edit_obj_id, obj_table)
+
+        if old_obj_info == 'Fail':
             print('无法找到此信息，请确认后重新修改！')
         else:
             # 输出原始信息
-            print('教师ID（唯一）：%s' % obj_info.ID)
-            print('教师名称：%s' % obj_info.Teacher_name)
-            print('教师性别：%s' % obj_info.Teacher_sex)
-            print('教师地址：%s' % obj_info.Teacher_addr)
-            print('教师年龄：%s' % obj_info.Teacher_age)
-            print('教师电话：%s' % obj_info.Teacher_tell)
-            print('教师工资：%s' % obj_info.Teacher_salary)
-            print('教师所属学校：%s' % obj_info.Teach_School)
+            print('\033[30;1m******讲师原始信息******\033[0m')
+            print('教师ID（唯一）：%s' % old_obj_info.ID)
+            print('教师名称：%s' % old_obj_info.Teacher_name)
+            print('教师性别：%s' % old_obj_info.Teacher_sex)
+            print('教师地址：%s' % old_obj_info.Teacher_addr)
+            print('教师年龄：%s' % old_obj_info.Teacher_age)
+            print('教师电话：%s' % old_obj_info.Teacher_tell)
+            print('教师工资：%s' % old_obj_info.Teacher_salary)
+            print('教师所属学校：%s' % old_obj_info.Teacher_School.School_Name)
+            print('*********************')
+            print('\033[30;1m修改菜单选项\033[0m')
             print(style.teacher_menu_arrt)
-            update_attr = input('\033[31;1m请输入您需要修改的信息\033[0m')
+            update_attr = input('\033[31;1m请选择您需要修改的信息>>：\033[0m')
             if update_attr in style.teacher_arrt:
                 new_val = input('\033[31;1m请输入新值>>：\033[0m')
-                rank_name = style.school_attr[update_attr]
+                rank_name = style.teacher_arrt[update_attr]
                 # 执行更新操作
                 try:
-                    new_teacher_info = Editor_info.update_teacher_info(obj_info, obj_info.ID, rank_name, new_val, obj_table)
+                    new_teacher_info = Editor_info.update_teacher_info(old_obj_info, old_obj_info.ID, rank_name, new_val, obj_table)
                     # 输出更新后的信息
+                    print('\033[30;1m更新中，请稍侯！！！\033[0m')
+                    time.sleep(1)
+                    print('\033[30;1m》》》》更新完成，更新后的信息为》》》》\033[0m')
                     print('教师ID（唯一）：%s' % new_teacher_info.ID)
                     print('教师名称：%s' % new_teacher_info.Teacher_name)
                     print('教师性别：%s' % new_teacher_info.Teacher_sex)
@@ -128,7 +135,7 @@ class Editor_info():
                     print('教师年龄：%s' % new_teacher_info.Teacher_age)
                     print('教师电话：%s' % new_teacher_info.Teacher_tell)
                     print('教师工资：%s' % new_teacher_info.Teacher_salary)
-                    print('教师所属学校：%s' % new_teacher_info.Teach_School)
+                    print('教师所属学校：%s' % new_teacher_info.Teacher_School.School_Name)
                 except EOFError:
                     print('系统异常，更新信息失败，请联系管理员！')
         return main_master.manage_view
@@ -195,33 +202,33 @@ class Editor_info():
             # 改教师名称
             new_obj = database_info.Teacher(obj_info.ID,new_val, obj_info.Teacher_name, obj_info.Teacher_addr,
                                             obj_info.Teacher_age, obj_info.Teacher_tell, obj_info.Teacher_salary,
-                                            obj_info.Teach_School)
+                                            obj_info.Teacher_School)
         elif rank_name == 'Teacher_sex':
             # 更改性别
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name,new_val, obj_info.Teacher_addr,
                                             obj_info.Teacher_age, obj_info.Teacher_tell, obj_info.Teacher_salary,
-                                            obj_info.Teach_School)
+                                            obj_info.Teacher_School)
         elif rank_name == 'Teacher_addr':
             # 改地址
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,new_val,
                                             obj_info.Teacher_age, obj_info.Teacher_tell, obj_info.Teacher_salary,
-                                            obj_info.Teach_School)
+                                            obj_info.Teacher_School)
         elif rank_name == 'Teacher_age':
             # 改年龄
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
                                             obj_info.Teacher_addr, new_val, obj_info.Teacher_tell,
-                                            obj_info.Teacher_salary, obj_info.Teach_School)
+                                            obj_info.Teacher_salary, obj_info.Teacher_School)
         elif rank_name == 'Teacher_tell':
             # 改电话
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
                                             obj_info.Teacher_addr, obj_info.Teacher_age,new_val, obj_info.Teacher_salary
-                                            , obj_info.Teach_School)
+                                            , obj_info.Teacher_School)
         elif rank_name == 'Teacher_salary':
             # 改工资
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
                                             obj_info.Teacher_addr,obj_info.Teacher_age, obj_info.Teacher_tell,new_val,
-                                            obj_info.Teach_School)
-        elif rank_name == 'Teach_School':
+                                            obj_info.Teacher_School)
+        elif rank_name == 'Teacher_School':
             # 改学校
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
                                             obj_info.Teacher_addr, obj_info.Teacher_age, obj_info.Teacher_tell,

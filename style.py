@@ -61,7 +61,7 @@ teacher_arrt = {
     '4':'Teacher_age',
     '5':'Teacher_tell',
     '6':'Teacher_salary',
-    '7':'Teach_School'
+    '7':'Teacher_School'
 }
 
 school_menu_arrt = u'''
