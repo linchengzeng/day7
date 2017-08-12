@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-
 import setting,pickle
 
 BASE_PATH = setting.BASE_PATH

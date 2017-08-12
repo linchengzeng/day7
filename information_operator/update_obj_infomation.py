@@ -44,7 +44,7 @@ class Editor_info():
                 rank_val = style.school_attr[update_attr]
                 try:
                     # 执行更新学校信息操作
-                    new_obj_info = Editor_info.update_school_info(obj_info,obj_info.ID,rank_val,new_val,obj_table)
+                    new_obj_info = Editor_info.update_school_info(obj_table, obj_info.ID, rank_val, new_val, obj_info)
                     # 输出更新后的信息
                     print('》》》》更新完成，更新后的信息为》》》》')
                     print('学校ID（唯一）：%s' % new_obj_info.ID)
@@ -80,8 +80,8 @@ class Editor_info():
                 rank_name = style.course_attr[update_attr]
                 try:
                     # 执行更新操作
-                    new_course_info = Editor_info.update_course_info(obj_info, obj_info.ID, rank_name, new_val,
-                                                                     obj_table)
+                    new_course_info = Editor_info.update_course_info(obj_table, obj_info.ID, rank_name, new_val,
+                                                                     obj_info)
                     # 输出更新后的信息
                     print('》》》》更新完成，更新后的信息为》》》》')
                     print('课程ID（唯一）：%s' % new_course_info.ID)
@@ -144,7 +144,7 @@ class Editor_info():
 
 
     # 执行更新学校信息操作
-    def update_school_info(obj, ID, obj_rank, new_val, obj_table):
+    def update_school_info(obj_table, ID, obj_rank, new_val, obj_info):
         # 读取所有信息
         all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
         for line in all_obj_info:
@@ -153,22 +153,22 @@ class Editor_info():
                 all_obj_info.remove(line)
         # 新建一个新的对象，并将新的值写入新对象
         if obj_rank == 'School_Name':
-            #改名称
-            new_obj = database_info.School(obj.ID, new_val, obj.School_Addr, obj.School_Tel)
-        elif obj_rank =='School_Addr':
-            #改地址
-            new_obj = database_info.School(obj.ID, obj.School_Name, new_val,  obj.School_Tel)
+            # 改名称
+            new_obj = database_info.School(obj_info.ID, new_val, obj_info.School_Addr, obj_info.School_Tel)
+        elif obj_rank == 'School_Addr':
+            # 改地址
+            new_obj = database_info.School(obj_info.ID, obj_info.School_Name, new_val,  obj_info.School_Tel)
         elif obj_rank == 'School_Tel':
-            #改电话
-            new_obj = database_info.School(obj.ID, obj.School_Name, obj.School_Addr, new_val)
-        #将更新后的对象添加到原来的数据库表中
+            # 改电话
+            new_obj = database_info.School(obj_info.ID, obj_info.School_Name, obj_info.School_Addr, new_val)
+        # 将更新后的对象添加到原来的数据库表中
         all_obj_info.append(new_obj)
-        #数据持久化到文件中
+        # 数据持久化到文件中
         db_operator.operator_db.fulsh_db(all_obj_info,obj_table)
         return new_obj
 
     # 执行更新课程信息
-    def update_course_info(obj_info, ID, rank_name, new_val, obj_table):
+    def update_course_info(obj_table, ID, rank_name, new_val, obj_info):
         # 读取所有信息
         all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
         for line in all_obj_info:
@@ -195,7 +195,7 @@ class Editor_info():
         return new_obj
 
     # 执行更新教师信息
-    def update_teacher_info(obj_info, ID, rank_name, new_val, obj_table):
+    def update_teacher_info(obj_table, ID, rank_name, new_val, obj_info):
         # 读取所有信息
         all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
         for line in all_obj_info:

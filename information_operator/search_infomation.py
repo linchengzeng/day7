@@ -36,11 +36,17 @@ class Search_info():
                     print('学校名称：%s' % school_obj_info.School_Name)
                     print('学校地址：%s' % school_obj_info.School_Addr)
                     print('联系电话：%s' % school_obj_info.School_Tel)
-
             elif db_table == 'teacher_manage':
                 for teacher_obj_info in search_obj_list:
-                    print(teacher_obj_info)
-                    print('search_infomation.py   line in 41')
+                    print('************************')
+                    print('教师ID（唯一）：%s' % teacher_obj_info.ID)
+                    print('姓名：%s' % teacher_obj_info.Teacher_name)
+                    print('性别：%s' % teacher_obj_info.Teacher_sex)
+                    print('地址：%s' % teacher_obj_info.Teacher_addr)
+                    print('年龄：%s' % teacher_obj_info.Teacher_age)
+                    print('联系电话：%s' % teacher_obj_info.Teacher_tell)
+                    print('工资：%s' % teacher_obj_info.Teacher_salary)
+                    print('所属学校：%s' % teacher_obj_info.Teacher_School.School_Name)
             elif db_table == 'course_manage':
                 for course_obj_info in search_obj_list:
                     print('************************')
@@ -52,6 +58,13 @@ class Search_info():
                     print('联系电话：%s' % course_obj_info.Course_School.School_Tel)
             elif db_table == 'student_manage':
                 for student_obj_info in search_obj_list:
-                    print(student_obj_info)
-                    print('search_infomation.py   line in 52')
+                    print('************************')
+                    print('学生ID（唯一）：' % student_obj_info.ID)
+                    print('姓名：' % student_obj_info.Stu_name)
+                    print('性别：' % student_obj_info.Stu_sex)
+                    print('住址：' % student_obj_info.Stu_addr)
+                    print('年龄：' % student_obj_info.Stu_age)
+                    print('联系电话：' % student_obj_info.Stu_tel)
+                    print('所在学校：' % student_obj_info.Stu_school.School_Name)
+                    # print('所学课程：' % student_obj_info.Stu_Cour.)
             print('**********查询结束**********')
