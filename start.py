@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
 
-import sys,time,os,logging
+import sys, time, os, logging, main_master
 
 
 if __name__ == '__main__':
@@ -20,5 +20,5 @@ if __name__ == '__main__':
         time.sleep(0.1)
         if i == 15:
             sys.stdout.write('欢迎使用简易校园管理系统')
-    import main_master
-    logging.info(main_master)
+    main_master.main_page()
+    # logging.info(main_master)

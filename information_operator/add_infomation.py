@@ -70,13 +70,37 @@ class Add_info(object):
     # 添加班级信息
     def add_classes(obj_table):
         print('this is add_infomation.py in line 72')
-        print('\n\033[30;1m请先输入班级所属\033[0m\033[31;1m学校的ID\033[0m\033[30;1m、'
-              '授课\033[0m\033[31;1m教师的ID\033[0m\033[30;1m，再输入其他相关信息！\033[0m')
+        print('\n\033[30;1m请先输入班级所属\033[0m'
+              '\033[31;1m学校的ID、授课教师的ID、所学课程ID\033[0m'
+              '\033[30;1m，再输入其他相关信息！\033[0m')
         school_id = input('请输入学校ID：')
         school_obj = search_infomation.Search_info.search_id_in_table(school_id, 'school_manage')
         if school_obj == 'Fail':
             print('您输入的学校ID有误，请查询后再操作！')
             return main_master.manage_view
+        teacher_id = input('请输入任课教师的ID：')
+        teacher_obj = search_infomation.Search_info.search_id_in_table(teacher_id, 'teacher_manage')
+        if teacher_obj == 'Fail':
+            print('您输入的教师ID有误，请查询后再操作！')
+            return main_master.manage_view
+        course_id = input('请输入所学课程的ID：')
+        course_obj = search_infomation.Search_info.search_id_in_table(course_id, 'course_manage')
+        if course_obj == 'Fail':
+            print('您输入的课程ID有误，请查询后再操作！')
+            return main_master.manage_view
+        print('您现在选择的学校是：%s，选择的任课教师是：%s，所授课程是：%s'
+              % (school_obj.School_Name, teacher_obj.Teacher_name, course_obj.Course_name))
+        print('请输入以下班级信息：班级ID（唯一）、班级名称')
+        classes_id = input('班级ID（唯一）：')
+        search_classes_id = search_infomation.Search_info.search_id_in_table(classes_id, 'classes_manage')
+        if search_classes_id != 'Fail':
+            print('\033[30;1m您输入的班级ID已存在，请查询后再操作！\033[0m')
+            return main_master.manage_view
+        classes_name = input('班级名称：')
+        classes_obj = database_info.School.add_classes(classes_id, classes_name, school_obj, course_obj, teacher_obj)
+        result = db_operator.operator_db.add_obj_to_db(classes_obj, 'classes_manage')
+        return result
+
 
 
 
@@ -109,9 +133,19 @@ class Add_info(object):
 
     # 添加学生信息
     def add_student_obj(obj_table):
-        print('请输入以下内容：学生ID、学生姓名、性别、住址、年龄、联系电话')
-        stu_id = input('学生ID：')
-        stu_name = input('学生姓名：')
+        print('创建学员时需先选择学校、关联班级后再添加学员信息！')
+        school_id = input('请输入学员所在学校：')
+        school_obj = search_infomation.Search_info.search_id_in_table(school_id, 'school_manage')
+        if school_obj == 'Fail':
+            print('您输入的学校ID有误，请查询后再操作！')
+            return main_master.manage_view
+        classes_id = input('请输入班级ID：')
+        classes_obj = search_infomation.Search_info.search_id_in_table(classes_id, 'classes_manage')
+        if classes_obj == 'Fail':
+            print()
+        print('请输入以下内容：学员ID（唯一）、姓名、性别、住址、年龄、联系电话')
+        stu_id = input('学员ID：')
+        stu_name = input('姓名：')
         stu_sex = input('性别：')
         stu_addr = input('住址：')
         stu_age = input('年龄：')

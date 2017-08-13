@@ -12,12 +12,13 @@ class School():
         self.School_Addr = school_addr
         self.School_Tel = school_tel
 
-    def add_course(self, ID, course_name, course_period, course_cost, School):
+    def add_course(ID, course_name, course_period, course_cost, School):
         result = Course( ID, course_name, course_period, course_cost, School)
         return result
 
-    def add_classes(self, ID, class_name, class_school, class_course, class_teacher):
+    def add_classes(ID, class_name, class_school, class_course, class_teacher):
         result = Classes(ID, class_name, class_school, class_course, class_teacher)
+        return result
 
 class Classes():
     def __init__(self, ID, class_name,  School, Course, Teacher):
@@ -28,9 +29,9 @@ class Classes():
         :param Course:班级关联课程
         :param Teacher:班级关联老师
         '''
-        self.ID = ID,
-        self.Class_Name = class_name,
-        self.Class_School = School,
+        self.ID = ID
+        self.Class_Name = class_name
+        self.Class_School = School
         self.Class_Course = Course
         self.Class_Teacher = Teacher
 

@@ -19,7 +19,9 @@ class Editor_info():
         elif obj_table == 'course_manage':
             Editor_info.editor_course_obj((obj_table))
         elif obj_table == 'student_manage':
-            print('update_obj_infomation.py line 23')
+            print('update_obj_infomation.py line 22')
+        elif obj_table == 'classes_manage':
+            print('updateb_obj_infomation.py line 24')
 
 
     # 更新前后的学校信息
@@ -120,8 +122,16 @@ class Editor_info():
             print(style.teacher_menu_arrt)
             update_attr = input('\033[31;1m请选择您需要修改的信息>>：\033[0m')
             if update_attr in style.teacher_arrt:
-                new_val = input('\033[31;1m请输入新值>>：\033[0m')
-                rank_name = style.teacher_arrt[update_attr]
+                if update_attr == '7':
+                    print('修改教师所属学校 update_obj_infomation.py line 126')
+                    new_school_id = input('请输入新的学校ID')
+                    new_val = db_operator.operator_db.search_id_in_db(new_school_id, 'school_manage')
+                    if new_val == 'Fail':
+                        print('\033[30;1m没有找到学校ID，请查询后再操作！\033[0m')
+                        return main_master.manage_view
+                else:
+                    new_val = input('\033[31;1m请输入新值>>：\033[0m')
+                    rank_name = style.teacher_arrt[update_attr]
                 # 执行更新操作
                 try:
                     new_teacher_info = Editor_info.update_teacher_info(old_obj_info, old_obj_info.ID, rank_name,

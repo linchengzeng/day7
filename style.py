@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
 
+import main_master
+
 menu = u'''
     1：学员视图
     2：讲师视图
@@ -12,7 +14,7 @@ menu_dict = {
         'classes_manage': '班级',
         'teacher_manage': '讲师',
         'course_manage': '课程',
-        'student_manage': '学生'
+        'student_manage': '学生',
     }
 
 menu_desc = u'''
