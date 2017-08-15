@@ -9,20 +9,8 @@ import setting,style,main_master,time
 
 BASE_PATH = setting.BASE_PATH
 
-class Editor_info():
-
-    def update_obj_info(obj_table):
-        if obj_table == 'school_manage':
-            Editor_info.editor_school_obj(obj_table)
-        elif obj_table == 'teacher_manage':
-            Editor_info.edit_teacher_info(obj_table)
-        elif obj_table == 'course_manage':
-            Editor_info.editor_course_obj((obj_table))
-        elif obj_table == 'student_manage':
-            print('update_obj_infomation.py line 22')
-        elif obj_table == 'classes_manage':
-            print('updateb_obj_infomation.py line 24')
-
+class uptate_info():
+    '''
 
     # 更新前后的学校信息
     def editor_school_obj(obj_table):
@@ -46,7 +34,7 @@ class Editor_info():
                 rank_val = style.school_attr[update_attr]
                 try:
                     # 执行更新学校信息操作
-                    new_obj_info = Editor_info.update_school_info(obj_table, obj_info.ID, rank_val, new_val, obj_info)
+                    new_obj_info = uptate_info.update_school_info(obj_table, obj_info.ID, rank_val, new_val, obj_info)
                     # 输出更新后的信息
                     print('》》》》更新完成，更新后的信息为》》》》')
                     print('学校ID（唯一）：%s' % new_obj_info.ID)
@@ -82,7 +70,7 @@ class Editor_info():
                 rank_name = style.course_attr[update_attr]
                 try:
                     # 执行更新操作
-                    new_course_info = Editor_info.update_course_info(obj_table, obj_info.ID, rank_name, new_val,
+                    new_course_info = uptate_info.update_course_info(obj_table, obj_info.ID, rank_name, new_val,
                                                                      obj_info)
                     # 输出更新后的信息
                     print('》》》》更新完成，更新后的信息为》》》》')
@@ -134,7 +122,7 @@ class Editor_info():
                     rank_name = style.teacher_arrt[update_attr]
                 # 执行更新操作
                 try:
-                    new_teacher_info = Editor_info.update_teacher_info(old_obj_info, old_obj_info.ID, rank_name,
+                    new_teacher_info = uptate_info.update_teacher_info(old_obj_info, old_obj_info.ID, rank_name,
                                                                        new_val, obj_table)
                     # 输出更新后的信息
                     print('\033[30;1m更新中，请稍侯！！！\033[0m')
@@ -152,7 +140,7 @@ class Editor_info():
                     print('系统异常，更新信息失败，请联系管理员！')
         return main_master.manage_view
 
-
+'''
     # 执行更新学校信息操作
     def update_school_info(obj_table, ID, obj_rank, new_val, obj_info):
         # 读取所有信息
@@ -253,3 +241,35 @@ class Editor_info():
         # 数据持久化到文件中
         db_operator.operator_db.fulsh_db(all_obj_info, obj_table)
         return new_obj
+
+    # 更新班级信息
+    def updata_classes_info(obj_table, ID, rank_name, new_val, obj_info):
+        # 读取所有信息
+        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        for line in all_obj_info:
+            # 判断是本次需要修改的信息ID时进行删除
+            if ID == line.ID:
+                all_obj_info.remove(line)
+                # 新建一个新的对象，并将新的值写入新对象
+        if rank_name == 'Class_Name':
+            # 修改班级名称
+            new_obj = database_info.Classes(obj_info.ID, new_val, obj_info.Class_School, obj_info.Class_Course,
+                                            obj_info.Class_Teacher)
+        elif rank_name == 'Class_School':
+            # 修改班级所属学校
+            new_obj = database_info.Classes(obj_info.ID, obj_info.Class_Name, new_val, obj_info.Class_Course,
+                                            obj_info.Class_Teacher)
+        elif rank_name == 'Class_Course':
+            # 修改班级所授课程
+            new_obj = database_info.Classes(obj_info.ID, obj_info.Class_Name, obj_info.Class_School, new_val,
+                                            obj_info.Class_Teacher)
+        elif rank_name == 'Class_Teacher':
+            # 修改班级授课教师
+            new_obj = database_info.Classes(obj_info.ID, obj_info.Class_Name, obj_info.Class_School,
+                                            obj_info.Class_Course, new_val)
+        # 将更新后的对象添加到原来的数据库表中
+        all_obj_info.append(new_obj)
+        # 数据持久化到文件中
+        db_operator.operator_db.fulsh_db(all_obj_info, obj_table)
+        return new_obj
+

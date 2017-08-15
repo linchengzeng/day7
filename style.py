@@ -27,11 +27,11 @@ menu_desc = u'''
    '''
 
 option_menu_desc_dict = {
-    '1：添加':'add_obj',
-    '2：修改':'editor_obj',
-    '3：删除':'dele_obj',
-    '4：查询':'search_obj',
-    '5：返回上级操作':'last'
+    '1：添加': 'add_obj',
+    '2：修改': 'editor_obj',
+    '3：删除': 'dele_obj',
+    '4：查询': 'search_obj',
+    '5：返回上级操作': 'last'
 }
 
 menu_num_dict = {
@@ -45,9 +45,9 @@ menu_num_dict = {
 
 
 school_attr = {
-    '1':'School_Name',
-    '2':'School_Addr',
-    '3':'School_Tel'
+    '1': 'School_Name',
+    '2': 'School_Addr',
+    '3': 'School_Tel'
 }
 
 course_attr = {
@@ -57,14 +57,22 @@ course_attr = {
 }
 
 teacher_arrt = {
-    '1':'Teacher_name',
-    '2':'Teacher_sex',
-    '3':'Teacher_addr',
-    '4':'Teacher_age',
-    '5':'Teacher_tell',
-    '6':'Teacher_salary',
-    '7':'Teacher_School'
+    '1': 'Teacher_name',
+    '2': 'Teacher_sex',
+    '3': 'Teacher_addr',
+    '4': 'Teacher_age',
+    '5': 'Teacher_tell',
+    '6': 'Teacher_salary',
+    '7': 'Teacher_School'
 }
+
+classes_arrt = {
+    '1': 'Class_Name',
+    '2': 'Class_School',
+    '3': 'Class_Course',
+    '4': 'Class_Teacher'
+}
+
 
 school_menu_arrt = u'''
     1:学校名称
@@ -86,4 +94,11 @@ teacher_menu_arrt = u'''
     5：教师电话
     6：教师工资
     7：教师所属学校
+'''
+
+classes_arrt_menu = u'''
+    1：班级名称
+    2：班级所属学校
+    3：班级所授课程
+    4：班级任课老师
 '''

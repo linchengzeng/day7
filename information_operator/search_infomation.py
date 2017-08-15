@@ -67,4 +67,11 @@ class Search_info():
                     print('联系电话：' % student_obj_info.Stu_tel)
                     print('所在学校：' % student_obj_info.Stu_school.School_Name)
                     # print('所学课程：' % student_obj_info.Stu_Cour.)
+            elif db_table == 'classes_manage':
+                for classes_obj_info in search_obj_list:
+                    print('************************')
+                    print('班级ID（唯一）：%s' % classes_obj_info.ID)
+                    print('班级名称：%s' % classes_obj_info.Class_Name)
+                    print('所教课程：%s' % classes_obj_info.Class_Course.Course_name)
+                    print('任课讲师：%s' % classes_obj_info.Class_Teacher.Teacher_name)
             print('**********查询结束**********')

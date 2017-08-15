@@ -1,14 +1,14 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-from information_operator import add_infomation,update_obj_infomation,dele_infomation,search_infomation
-import main_master,style
+from information_operator import add_infomation, edit_obj_infomation, dele_infomation, search_infomation
+import style
 
 def last(object):
     print('返回上级操作')
 
 option_menu_dict = {
     '1': add_infomation.Add_info.add_obj,
-    '2': update_obj_infomation.Editor_info.update_obj_info,
+    '2': edit_obj_infomation.Editor_info.edit_obj_info,
     '3': dele_infomation.Dele_obj_info.dele_id_in_obj,
     '4': search_infomation.Search_info.search_all_obj,
     '5': last

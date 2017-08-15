@@ -83,7 +83,7 @@ class Add_info(object):
         if teacher_obj == 'Fail':
             print('您输入的教师ID有误，请查询后再操作！')
             return main_master.manage_view
-        course_id = input('请输入所学课程的ID：')
+        course_id = input('请输入所教课程的ID：')
         course_obj = search_infomation.Search_info.search_id_in_table(course_id, 'course_manage')
         if course_obj == 'Fail':
             print('您输入的课程ID有误，请查询后再操作！')
