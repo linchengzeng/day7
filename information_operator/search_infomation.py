@@ -59,14 +59,14 @@ class Search_info():
             elif db_table == 'student_manage':
                 for student_obj_info in search_obj_list:
                     print('************************')
-                    print('学生ID（唯一）：' % student_obj_info.ID)
-                    print('姓名：' % student_obj_info.Stu_name)
-                    print('性别：' % student_obj_info.Stu_sex)
-                    print('住址：' % student_obj_info.Stu_addr)
-                    print('年龄：' % student_obj_info.Stu_age)
-                    print('联系电话：' % student_obj_info.Stu_tel)
-                    print('所在学校：' % student_obj_info.Stu_school.School_Name)
-                    # print('所学课程：' % student_obj_info.Stu_Cour.)
+                    print('学生ID（唯一）：%s' % student_obj_info.ID)
+                    print('姓名：%s' % student_obj_info.Stu_name)
+                    print('性别：%s' % student_obj_info.Stu_sex)
+                    print('住址：%s' % student_obj_info.Stu_addr)
+                    print('年龄：%s' % student_obj_info.Stu_age)
+                    print('联系电话：%s' % student_obj_info.Stu_tel)
+                    print('所在学校：%s' % student_obj_info.Stu_school.School_Name)
+                    print('所在班级：%s' % student_obj_info.Stu_Class.Class_Name)
             elif db_table == 'classes_manage':
                 for classes_obj_info in search_obj_list:
                     print('************************')

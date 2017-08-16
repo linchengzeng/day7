@@ -72,7 +72,16 @@ classes_arrt = {
     '3': 'Class_Course',
     '4': 'Class_Teacher'
 }
-
+student_arrt = {
+    '1': 'Stu_name',
+    '2': 'Stu_sex',
+    '3': 'Stu_addr',
+    '4': 'Stu_age,',
+    '5': 'Stu_tel',
+    '6': 'Stu_school',
+    '7': 'Stu_Class',
+    '8': 'Stu_Balance'
+}
 
 school_menu_arrt = u'''
     1:学校名称
@@ -101,4 +110,15 @@ classes_arrt_menu = u'''
     2：班级所属学校
     3：班级所授课程
     4：班级任课老师
+'''
+
+student_arrt_menu = u'''
+    1：学生姓名
+    2：学生性别
+    3：联系地址
+    4：学生年龄
+    5：联系电话
+    6：所在学校
+    7：所在班级
+    8：余额
 '''

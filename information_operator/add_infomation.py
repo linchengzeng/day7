@@ -151,6 +151,6 @@ class Add_info(object):
         stu_age = input('年龄：')
         stu_tel = input('联系电话：')
         stu_balance = 0
-        add_stu = database_info.Student(stu_id, stu_name, stu_sex, stu_addr, stu_age, stu_tel, stu_balance)
+        add_stu = database_info.Student(stu_id, stu_name, stu_sex, stu_addr, stu_age, stu_tel, stu_balance, school_obj, classes_obj)
         result = db_operator.operator_db.add_obj_to_db(add_stu, obj_table)
         return result

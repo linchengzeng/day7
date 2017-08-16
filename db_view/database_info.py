@@ -73,7 +73,7 @@ class Teacher():
         # self.Teach_Cour = Course   #老师所教科目
 
 class Student():
-    def __init__(self, ID, stu_name, stu_sex, stu_addr, stu_age, stu_tel):
+    def __init__(self, ID, stu_name, stu_sex, stu_addr, stu_age, stu_tel, stu_balance, School, Classes):
         '''
         :param ID:学生ID
         :param stu_name:学生姓名
@@ -90,5 +90,6 @@ class Student():
         self.Stu_addr = stu_addr
         self.Stu_age = stu_age
         self.Stu_tel = stu_tel
-        self.Stu_school = School
-        self.Stu_Cour = Course  #学生所学课程
+        self.Stu_school = School  # 选择学校
+        self.Stu_Class = Classes  # 关联班级
+        self.Stu_Balance = stu_balance
