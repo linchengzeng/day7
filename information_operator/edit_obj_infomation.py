@@ -234,6 +234,13 @@ class Editor_info():
              if update_attr in style.student_arrt:
                  rank_name = style.student_arrt[update_attr]
                  new_val = input('请输入新值>>：')
+                 if update_attr == '6':
+                     new_val = db_operator.operator_db.search_id_in_db(new_val, 'school_manage')
+                 elif update_attr == '7':
+                     new_val = db_operator.operator_db.search_id_in_db(new_val, 'classes_manage')
+                 if new_val == 'Fail':
+                     print('无法找到对象！请查询后再操作！')
+                     return main_master.manage_view
                  try:
                      print('更新中，请稍侯！！！')
                      time.sleep(1)

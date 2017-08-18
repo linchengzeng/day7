@@ -3,7 +3,7 @@
 
 
 from db_view import db_operator,database_info
-from information_operator import public_search
+from information_operator import auth_info
 
 import setting,style,main_master,time
 
@@ -144,7 +144,7 @@ class uptate_info():
     # 执行更新学校信息操作
     def update_school_info(obj_table, obj_rank, new_val, obj_info):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_table(obj_table)
         for line in all_obj_info:
             # 判断是本次需要修改的信息ID时进行删除
             if obj_info.ID == line.ID:
@@ -168,7 +168,7 @@ class uptate_info():
     # 执行更新课程信息
     def update_course_info(obj_table, rank_name, new_val, obj_info):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_table(obj_table)
         for line in all_obj_info:
             # 判断是本次需要修改的信息ID时进行删除
             if obj_info.ID == line.ID:
@@ -195,7 +195,7 @@ class uptate_info():
     # 执行更新教师信息
     def update_teacher_info(obj_table, rank_name, new_val, obj_info):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_table(obj_table)
         for line in all_obj_info:
             # 判断是本次需要修改的信息ID时进行删除
             if obj_info.ID == line.ID:
@@ -245,7 +245,7 @@ class uptate_info():
     # 更新班级信息
     def updata_classes_info(obj_table, rank_name, new_val, obj_info):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_table(obj_table)
         for line in all_obj_info:
             # 判断是本次需要修改的信息ID时进行删除
             if obj_info.ID == line.ID:
@@ -276,38 +276,41 @@ class uptate_info():
     # 更新学生信息
     def update_student_obj(obj_table, rank_name, new_val, obj_info):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_table(obj_table)
+        for line in all_obj_info:
+            if line.ID == obj_info.ID:
+                all_obj_info.remove(line)
         if rank_name == 'Stu_name':
             new_obj = database_info.Student(obj_info.ID, new_val, obj_info.Stu_sex, obj_info.Stu_addr,
-                                            obj_info.Stu_age, obj_info.Stu_tel, obj_info.stu_balance,
-                                            obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
+                                            obj_info.Stu_age, obj_info.Stu_tel, obj_info.Stu_school,
+                                            obj_info.Stu_Class, obj_info.Stu_Balance)
         elif rank_name == 'Stu_sex':
             new_obj = database_info.Student(obj_info.ID, obj_info.Stu_name, new_val, obj_info.Stu_addr,
-                                            obj_info.Stu_age, obj_info.Stu_tel, obj_info.stu_balance,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
                                             obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
         elif rank_name == 'Stu_addr':
             new_obj = database_info.Student(obj_info.ID, obj_info.Stu_name, obj_info.Stu_sex, new_val,
-                                            obj_info.Stu_age, obj_info.Stu_tel, obj_info.stu_balance,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
                                             obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
         elif rank_name == 'Stu_age':
             new_obj = database_info.Student(obj_info.ID, obj_info.Stu_name, obj_info.Stu_sex, obj_info.Stu_addr,
-                                            new_val, obj_info.Stu_tel, obj_info.stu_balance,
+                                            new_val, obj_info.Stu_tel,
                                             obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
         elif rank_name == 'Stu_tel':
             new_obj = database_info.Student(obj_info.ID, obj_info.Stu_name, obj_info.Stu_sex, obj_info.Stu_addr,
-                                            obj_info.Stu_age, new_val, obj_info.stu_balance,
+                                            obj_info.Stu_age, new_val,
                                             obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
         elif rank_name == 'Stu_school':
             new_obj = database_info.Student(obj_info.ID, obj_info.Stu_name, obj_info.Stu_sex, obj_info.Stu_addr,
-                                            obj_info.Stu_age, obj_info.Stu_tel, obj_info.stu_balance,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
                                             new_val, obj_info.Stu_Class, obj_info.Stu_Balance)
         elif rank_name == 'Stu_Class':
             new_obj = database_info.Student(obj_info.ID, obj_info.Stu_name, obj_info.Stu_sex, obj_info.Stu_addr,
-                                            obj_info.Stu_age, obj_info.Stu_tel, obj_info.stu_balance,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
                                             obj_info.Stu_school, new_val, obj_info.Stu_Balance)
         elif rank_name == 'Stu_Balance':
             new_obj = database_info.Student(obj_info.ID, obj_info.Stu_name, obj_info.Stu_sex, obj_info.Stu_addr,
-                                            obj_info.Stu_age, obj_info.Stu_tel, obj_info.stu_balance,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
                                             obj_info.Stu_school, obj_info.Stu_Class, new_val)
         # 将更新后的对象添加到原来的数据库表中
         all_obj_info.append(new_obj)

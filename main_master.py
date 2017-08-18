@@ -7,7 +7,7 @@ user_data = {
     'is_authenticated':''
 }
 
-###认证装饰器
+# ##认证装饰器
 def authentication(auth_val):
     def out_wapper(func):
         def wapper(*args,**kwargs):
@@ -27,11 +27,21 @@ def authentication(auth_val):
     return out_wapper
 
 @authentication(auth_val  = 'student_view')
-def student_view(args,kwargs):
-    pass
+def student_view(*args,**kwargs):
+    print('欢迎%s回来' % user_data['username'])
+    while True:
+        print('\033[30;1m您现在所在的位置是：学生管理视图\033[0m')
+        print(style.user_view_menu_desc)
+        user_select_menu = input('请选择您需要的操作>>：')
+        if user_select_menu in style.user_view_menu:
+            pass
+        else:
+            print('您选择的不在我提供的服务范围内，请重新选择！')
+            return student_view(args,kwargs)
+
 
 @authentication(auth_val = 'teacher_view')
-def teacher_view(args,kwargs):
+def teacher_view(*args,**kwargs):
     pass
 
 # @authentication(auth_val = 'classes_view')
@@ -42,7 +52,7 @@ def teacher_view(args,kwargs):
 管理视图函数
 '''
 @authentication(auth_val = 'manage_view')
-def manage_view(args,kwargs):
+def manage_view(*args,**kwargs):
     while True:
         print('\033[30;1m\n您现在所在位置：管理视图\033[0m')
         print(style.menu_desc)

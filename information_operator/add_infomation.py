@@ -145,12 +145,14 @@ class Add_info(object):
             print()
         print('请输入以下内容：学员ID（唯一）、姓名、性别、住址、年龄、联系电话')
         stu_id = input('学员ID：')
+        pwd = ''
         stu_name = input('姓名：')
         stu_sex = input('性别：')
         stu_addr = input('住址：')
         stu_age = input('年龄：')
         stu_tel = input('联系电话：')
         stu_balance = 0
-        add_stu = database_info.Student(stu_id, stu_name, stu_sex, stu_addr, stu_age, stu_tel, stu_balance, school_obj, classes_obj)
+        add_stu = database_info.Student(stu_id, pwd, stu_name, stu_sex, stu_addr, stu_age, stu_tel, school_obj,
+                                        classes_obj, stu_balance)
         result = db_operator.operator_db.add_obj_to_db(add_stu, obj_table)
         return result

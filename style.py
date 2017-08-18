@@ -9,6 +9,17 @@ menu = u'''
     3：管理视图
     4：退出
 '''
+
+user_view_menu_desc = u'''
+    1：个人信息管理
+    2：课程管理
+'''
+
+user_view_menu = {
+    '1': 'u_info_manage',
+    '2': 'c_info_manage',
+}
+
 menu_dict = {
         'school_manage': '学校',
         'classes_manage': '班级',
