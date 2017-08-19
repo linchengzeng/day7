@@ -12,9 +12,28 @@ class School():
         self.School_Addr = school_addr
         self.School_Tel = school_tel
 
-    def add_course(self, ID, course_name, course_period, course_cost, School):
+    def add_course(ID, course_name, course_period, course_cost, School):
         result = Course( ID, course_name, course_period, course_cost, School)
         return result
+
+    def add_classes(ID, class_name, class_school, class_course, class_teacher):
+        result = Classes(ID, class_name, class_school, class_course, class_teacher)
+        return result
+
+class Classes():
+    def __init__(self, ID, class_name,  School, Course, Teacher):
+        '''
+        :param ID:班级ID
+        :param class_name:班级名称
+        :param School:班级所属学校
+        :param Course:班级关联课程
+        :param Teacher:班级关联老师
+        '''
+        self.ID = ID
+        self.Class_Name = class_name
+        self.Class_School = School
+        self.Class_Course = Course
+        self.Class_Teacher = Teacher
 
 class Course():
     def __init__(self, ID, course_name, course_period, course_cost, School):
@@ -54,12 +73,24 @@ class Teacher():
         # self.Teach_Cour = Course   #老师所教科目
 
 class Student():
-    def __init__(self, ID, stu_name, stu_sex, stu_addr, stu_age, stu_tel):
+    def __init__(self, ID,pwd, stu_name, stu_sex, stu_addr, stu_age, stu_tel, School, Classes, stu_balance):
+        '''
+        :param ID:学生ID
+        :param stu_name:学生姓名
+        :param stu_sex:学生性别
+        :param stu_addr:学生地址
+        :param stu_age:学生年龄
+        :param stu_tel:学生电话
+        :param School:学生所在学校
+        :param Course:学生所学课程
+        '''
+        self.ID = ID
+        self.Pwd = pwd
         self.Stu_name = stu_name
         self.Stu_sex = stu_sex
         self.Stu_addr = stu_addr
         self.Stu_age = stu_age
         self.Stu_tel = stu_tel
-        self.ID = ID
-        self.Stu_school = School
-        self.Stu_Cour = Course  #学生所学课程
+        self.Stu_school = School  # 选择学校
+        self.Stu_Class = Classes  # 关联班级
+        self.Stu_Balance = stu_balance
