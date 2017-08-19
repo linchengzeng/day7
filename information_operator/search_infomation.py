@@ -14,7 +14,7 @@ class Search_info():
         :param db_table:表名
         :return:
         '''
-        search_obj_list = db_operator.operator_db.search_all_table(db_table)
+        search_obj_list = db_operator.operator_db.search_all_obj(db_table)
         if search_obj_list == 'Fail':
             print('查谗失败或数据为空！请联系管理员！')
         else:

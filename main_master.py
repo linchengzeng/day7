@@ -1,22 +1,34 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
+from information_operator import auth_info
+from user_operator import user_manage
+from db_view import database_info
 import manage_master,style
 
-user_data = {
-    'username':'',
-    'is_authenticated':''
-}
+user_data = database_info.Student('010','abc','aling','man','beijin','18','010')
 
 # ##认证装饰器
 def authentication(auth_val):
     def out_wapper(func):
         def wapper(*args,**kwargs):
             if auth_val == 'student_view':
-                print('实现认证装饰student_view')
+                # uid = input('请输入您的ID>>：')
+                # pwd = input('请输入您的密码>>：')
+                # auth_result = auth_info.Auth_user_info.auth_login_info(uid, pwd, 'student_manage')
+                # if auth_info == 'Success':
                 func(args, kwargs)
+                # else:
+                #     print('\033[31;1m用户名或密码错误\033[0m')
+                #     main_page(args, kwargs)
             elif auth_val == 'teacher_view':
-                print('实现认证装饰teacher_view')
-                func(args, kwargs)
+                uid = input('请输入您的ID>>：')
+                pwd = input('请输入您的密码>>：')
+                auth_result = auth_info.Auth_user_info.auth_login_info(uid, pwd, 'teacher_manage')
+                if auth_info == 'Success':
+                    func(args, kwargs)
+                else:
+                    print('\033[31;1m用户名或密码错误\033[0m')
+                    main_page(args, kwargs)
             elif auth_val =='manage_view':
                 print('实现认证装饰manage_view')
                 func(args, kwargs)
@@ -28,13 +40,13 @@ def authentication(auth_val):
 
 @authentication(auth_val  = 'student_view')
 def student_view(*args,**kwargs):
-    print('欢迎%s回来' % user_data['username'])
+    print('欢迎%s回来' % user_data.Stu_name)
     while True:
         print('\033[30;1m您现在所在的位置是：学生管理视图\033[0m')
         print(style.user_view_menu_desc)
-        user_select_menu = input('请选择您需要的操作>>：')
+        user_select_menu = input('\033[31;1m请选择您需要的操作>>：\033[0m')
         if user_select_menu in style.user_view_menu:
-            pass
+            user_manage.User_info_manage.user_main_page(user_data)
         else:
             print('您选择的不在我提供的服务范围内，请重新选择！')
             return student_view(args,kwargs)

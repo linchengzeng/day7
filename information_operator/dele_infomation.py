@@ -12,7 +12,7 @@ class Dele_obj_info():
         # 用于标记对象存在数据库中
         del_obj_id_flag = True
         # 读取所有信息
-        all_obj_info = db_operator.operator_db.search_all_table(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_obj(obj_table)
         del_obj_id = input('\033[31;1m请输入您要删除的ID>>：\033[0m')
         try:
             for line in all_obj_info:

@@ -11,5 +11,7 @@ class Auth_user_info():
         search_result = db_operator.operator_db.search_id_in_db(user_id, obj_in_table)
         if search_result != "Fail":
             print('auth_info.py line 13')
+            return 'Success'
         else:
             print('auth_info.py line 15')
+            return 'Fail'

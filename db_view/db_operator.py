@@ -36,7 +36,7 @@ class operator_db(object):
             return 'Success'
         return result
 
-    def search_all_table(obj_db_table):
+    def search_all_obj(obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
         with open(db_file, 'rb+') as table_obj:
             try:

@@ -3,7 +3,7 @@
 
 
 from db_view import db_operator,database_info
-from information_operator import public_search
+# from information_operator import public_search
 
 import setting,style,main_master
 
@@ -137,7 +137,7 @@ class Editor_info():
     # 执行更新学校信息操作
     def update_school_info(obj, ID, obj_rank, new_val, obj_table):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_obj(obj_table)
         for line in all_obj_info:
             # 判断是本次需要修改的信息ID时进行删除
             if ID == line.ID:
@@ -161,7 +161,7 @@ class Editor_info():
     # 执行更新课程信息
     def update_course_info(obj_info, ID, rank_name, new_val, obj_table):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_obj(obj_table)
         for line in all_obj_info:
             # 判断是本次需要修改的信息ID时进行删除
             if ID == line.ID:
@@ -185,7 +185,7 @@ class Editor_info():
     # 执行更新教师信息
     def update_teacher_info(obj_info, ID, rank_name, new_val, obj_table):
         # 读取所有信息
-        all_obj_info = public_search.Public_search_all.search_obj_all(obj_table)
+        all_obj_info = db_operator.operator_db.search_all_obj(obj_table)
         for line in all_obj_info:
             # 判断是本次需要修改的信息ID时进行删除
             if ID == line.ID:
