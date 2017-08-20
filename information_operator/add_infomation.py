@@ -1,8 +1,11 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
+import main_master
+import style
 from db_view import database_info,db_operator
 from information_operator import search_infomation
-import manage_master,style,main_master
+from user_view import manage_page
+
 
 class Add_info(object):
 
@@ -22,10 +25,10 @@ class Add_info(object):
         if result == 'Fail':
             print('\033[31;1m此%s已存在,请检查后重新输入。 add_infomation.py line in 24\033[0m' % style.menu_dict[obj_table])
             print()
-            manage_master.manage_info(obj_table)
+            manage_page.manage_info(obj_table)
         elif result == 'Success':
             print('\033[31;1m添加成功!\033[0m')
-            manage_master.manage_info(obj_table)
+            manage_page.manage_info(obj_table)
 
     # 添加学校信息
     def add_school_obj(obj_table):
@@ -135,12 +138,12 @@ class Add_info(object):
     def add_student_obj(obj_table):
         print('创建学员时需先选择学校、关联班级后再添加学员信息！')
         school_id = input('请输入学员所在学校：')
-        school_obj = search_infomation.Search_info.search_id_in_table(school_id, 'school_manage')
+        school_obj = db_operator.operator_db.search_id_in_db(school_id, 'school_manage')
         if school_obj == 'Fail':
             print('您输入的学校ID有误，请查询后再操作！')
             return main_master.manage_view
         classes_id = input('请输入班级ID：')
-        classes_obj = search_infomation.Search_info.search_id_in_table(classes_id, 'classes_manage')
+        classes_obj = db_operator.operator_db.search_id_in_db(classes_id, 'classes_manage')
         if classes_obj == 'Fail':
             print()
         print('请输入以下内容：学员ID（唯一）、姓名、性别、住址、年龄、联系电话')

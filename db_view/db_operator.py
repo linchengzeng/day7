@@ -25,15 +25,15 @@ class operator_db(object):
         try:
             with open(db_file, 'rb+') as table_obj:
                 table_info = pickle.load(table_obj)
-            result = 'Fail'
+            result = None
             for line in table_info:
                 # ID存在表示信息已存在
                 if obj_id == line.ID:
                     # print('查到数据对象')
                     result = line
         except (EOFError,FileNotFoundError):
-            print('这是空文件导致需要执行此处')
-            return 'Success'
+            # print('这是空文件导致需要执行此处')
+            return None
         return result
 
     def search_all_obj(obj_db_table):

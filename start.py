@@ -20,5 +20,6 @@ if __name__ == '__main__':
         time.sleep(0.1)
         if i == 15:
             sys.stdout.write('欢迎使用简易校园管理系统')
+    print('\n\033[30;0m本系统暂不提供用户自行注册，若需使用本系统，请联系管理员添加用户！\033[0m')
     main_master.main_page()
     # logging.info(main_master)
