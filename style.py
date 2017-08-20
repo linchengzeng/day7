@@ -11,13 +11,17 @@ menu = u'''
 '''
 
 user_view_menu_desc = u'''
-    1：个人信息管理
-    2：课程管理
+    1：修改密码
+    2：个人信息管理
+    3：课程管理
+    4：返回上级操作
 '''
 
 user_view_menu = {
-    '1': 'u_info_manage',
-    '2': 'c_info_manage',
+    '1': 'edit_pwd',
+    '2': 'u_info_manage',
+    '3': 'c_info_manage',
+    '4': 'last'
 }
 
 menu_dict = {
@@ -87,7 +91,7 @@ student_arrt = {
     '1': 'Stu_name',
     '2': 'Stu_sex',
     '3': 'Stu_addr',
-    '4': 'Stu_age,',
+    '4': 'Stu_age',
     '5': 'Stu_tel',
     '6': 'Stu_school',
     '7': 'Stu_Class',

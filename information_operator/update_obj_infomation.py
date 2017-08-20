@@ -9,8 +9,8 @@ import setting,style,main_master
 
 BASE_PATH = setting.BASE_PATH
 
-class Editor_info():
-
+class uptate_info():
+    '''
     def update_obj_info(obj_table):
         if obj_table == 'school_manage':
             Editor_info.editor_school_obj(obj_table)
@@ -132,7 +132,7 @@ class Editor_info():
                 except EOFError:
                     print('系统异常，更新信息失败，请联系管理员！')
         return main_master.manage_view
-
+    '''
 
     # 执行更新学校信息操作
     def update_school_info(obj, ID, obj_rank, new_val, obj_table):
@@ -193,25 +193,84 @@ class Editor_info():
         # 新建一个新的对象，并将新的值写入新对象
         if rank_name == 'Teacher_name':
             # 改教师名称
-            new_obj = database_info.Teacher(obj_info.ID,new_val,obj_info.Teacher_name,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID, new_val, obj_info.Teacher_name, obj_info.Teacher_addr,
+                                            obj_info.Teacher_age, obj_info.Teacher_tell, obj_info.Teacher_salary,
+                                            obj_info.Teach_School)
         elif rank_name == 'Teacher_sex':
             # 更改性别
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,new_val,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, new_val, obj_info.Teacher_addr,
+                                            obj_info.Teacher_age, obj_info.Teacher_tell, obj_info.Teacher_salary,
+                                            obj_info.Teach_School)
         elif rank_name == 'Teacher_addr':
             # 改地址
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,new_val,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex, new_val,
+                                            obj_info.Teacher_age, obj_info.Teacher_tell, obj_info.Teacher_salary,
+                                            obj_info.Teach_School)
         elif rank_name == 'Teacher_age':
             # 改年龄
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,new_val,obj_info.Teacher_tell,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
+                                            obj_info.Teacher_addr, new_val, obj_info.Teacher_tell,
+                                            obj_info.Teacher_salary, obj_info.Teach_School)
         elif rank_name == 'Teacher_tell':
             # 改电话
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,new_val,obj_info.Teacher_salary,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
+                                            obj_info.Teacher_addr, obj_info.Teacher_age, new_val,
+                                            obj_info.Teacher_salary, obj_info.Teach_School)
         elif rank_name == 'Teacher_salary':
             # 改工资
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,new_val,obj_info.Teach_School)
+            new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
+                                            obj_info.Teacher_addr, obj_info.Teacher_age, obj_info.Teacher_tell,
+                                            new_val,obj_info.Teach_School)
         elif rank_name == 'Teach_School':
             # 改学校
-            new_obj = database_info.Teacher(obj_info.ID,obj_info.Teacher_name,obj_info.Teacher_sex,obj_info.Teacher_addr,obj_info.Teacher_age,obj_info.Teacher_tell,obj_info.Teacher_salary,new_val)
+            new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_name, obj_info.Teacher_sex,
+                                            obj_info.Teacher_addr, obj_info.Teacher_age, obj_info.Teacher_tell,
+                                            obj_info.Teacher_salary, new_val)
+        # 将更新后的对象添加到原来的数据库表中
+        all_obj_info.append(new_obj)
+        # 数据持久化到文件中
+        db_operator.operator_db.fulsh_db(all_obj_info, obj_table)
+        return new_obj
+# 更新学生信息
+    def update_student_obj(obj_table, rank_name, new_val, obj_info):
+        # 读取所有信息
+        all_obj_info = db_operator.operator_db.search_all_obj(obj_table)
+        for line in all_obj_info:
+            # 判断是本次需要修改的信息ID时进行删除
+            if obj_info.ID == line.ID:
+                all_obj_info.remove(line)
+        if rank_name == 'Stu_name':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, new_val, obj_info.Stu_sex, obj_info.Stu_addr,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
+                                            obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_sex':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, obj_info.Stu_name, new_val, obj_info.Stu_addr,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
+                                            obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_addr':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, obj_info.Stu_name, obj_info.Stu_sex, new_val,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
+                                            obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_age':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, obj_info.Stu_name, obj_info.Stu_sex,
+                                            obj_info.Stu_addr, new_val, obj_info.Stu_tel,
+                                            obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_tel':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, obj_info.Stu_name, obj_info.Stu_sex,
+                                            obj_info.Stu_addr,obj_info.Stu_age, new_val,
+                                            obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_school':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, obj_info.Stu_name, obj_info.Stu_sex,
+                                            obj_info.Stu_addr, obj_info.Stu_age, obj_info.Stu_tel,
+                                            new_val, obj_info.Stu_Class, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_Class':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, obj_info.Stu_name, obj_info.Stu_sex,
+                                            obj_info.Stu_addr, obj_info.Stu_age, obj_info.Stu_tel, obj_info.stu_balance,
+                                            obj_info.Stu_school, new_val, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_Balance':
+            new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, obj_info.Stu_name, obj_info.Stu_sex,
+                                            obj_info.Stu_addr, obj_info.Stu_age, obj_info.Stu_tel,
+                                            obj_info.Stu_school, obj_info.Stu_Class, new_val)
         # 将更新后的对象添加到原来的数据库表中
         all_obj_info.append(new_obj)
         # 数据持久化到文件中

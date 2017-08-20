@@ -11,8 +11,7 @@ class Auth_user_info():
         search_result = db_operator.operator_db.search_id_in_db(user_id, obj_in_table)
         if search_result:
             if search_result.Pwd == user_pwd:
-                print('auth_info.py line 13')
                 return search_result
-            else:
-                print('auth_info.py line 15')
-                return None
+        else:
+            print('\033[31;1m用户ID或密码错误\033[0m')
+            return None
