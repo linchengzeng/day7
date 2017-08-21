@@ -239,7 +239,11 @@ class uptate_info():
             # 判断是本次需要修改的信息ID时进行删除
             if obj_info.ID == line.ID:
                 all_obj_info.remove(line)
-        if rank_name == 'Stu_name':
+        if rank_name == 'Pwd':
+            new_obj = database_info.Student(obj_info.ID, new_val, obj_info.Stu_name, obj_info.Stu_sex, obj_info.Stu_addr,
+                                            obj_info.Stu_age, obj_info.Stu_tel,
+                                            obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
+        elif rank_name == 'Stu_name':
             new_obj = database_info.Student(obj_info.ID, obj_info.Pwd, new_val, obj_info.Stu_sex, obj_info.Stu_addr,
                                             obj_info.Stu_age, obj_info.Stu_tel,
                                             obj_info.Stu_school, obj_info.Stu_Class, obj_info.Stu_Balance)
