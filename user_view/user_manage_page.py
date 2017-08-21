@@ -31,7 +31,7 @@ class User_info_manage():
         if self.Pwd == old_pwd:
             result = update_obj_infomation.uptate_info.update_student_obj(obj_table, 'Pwd', new_pwd, self)
         if result:
-            print('\033[30;1m修改成功！\033[0m')
+            print('\033[30;1m更新成功！\033[0m')
 
     # 个人信息修改
     def u_info_manage(self, obj_table):
@@ -41,15 +41,25 @@ class User_info_manage():
     # 课程管理修改
     def c_info_manage(self, obj_table):
         print('user_manage_page.py line 30')
+        user_course = {
+            '1': User_info_manage.add_user_course,
+            '2': User_info_manage.search_user_course,
+            '3': User_info_manage.last,
+        }
         while True:
             print(style.user_course_menu_desc)
             user_course_operator = input('\033[31;1m请输入您需要的操作>>：\033[0m')
             if user_course_operator in style.user_course_menu:
-                result = ''
+                result = user_course[user_course_operator](self)
             else:
                 print('您的选择不在我们的服务范围，请重新选择！')
             return result
 
+    def add_user_course(self):
+        pass
+
+    def search_user_course(self):
+        pass
 
     def last(self,obj_table):
         return main_master.main_page()
