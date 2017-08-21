@@ -62,7 +62,7 @@ class Editor_info():
         print('********课程额外信息**********')
         print('开课地址：%s' % obj_info.Course_School.School_Addr)
         print('联系电话：%s' % obj_info.Course_School.School_Tel)
-        print(style.course_menu_arrt)
+        print(style.course_menu_arrt_desc)
         update_attr = input('\033[31;1m请输入您需要修改的信息\033[0m')
         if update_attr in style.course_attr:
             new_val = input('\033[31;1m请输入新值>>：\033[0m')
@@ -97,7 +97,7 @@ class Editor_info():
         print('教师所属学校：%s' % old_obj_info.Teacher_School.School_Name)
         print('*********************')
         print('\033[30;1m修改菜单选项\033[0m')
-        print(style.teacher_menu_arrt)
+        print(style.teacher_menu_desc)
         update_attr = input('\033[31;1m请选择您需要修改的信息>>：\033[0m')
         if update_attr in style.teacher_arrt:
             if update_attr == '7':
@@ -147,7 +147,7 @@ class Editor_info():
             print('班级所属学校：%s' % old_obj_info.Class_School.School_Name)
             print('*********************')
             print('\033[30;1m修改菜单选项\033[0m')
-            print(style.classes_arrt_menu)
+            print(style.classes_menu_desc)
             update_attr = input('\033[31;1m请选择您需要修改的信息>>：\033[0m')
             if update_attr in style.classes_arrt:
                 # 修改班级名称
@@ -204,7 +204,7 @@ class Editor_info():
          print('所在班级：%s' % old_obj_info.Stu_Class.Class_Name)
          print('余额：%s' % old_obj_info.Stu_Balance)
          print('*********************')
-         print(style.student_arrt_menu)
+         print(style.student_menu_desc)
          update_attr = input('\033[31;1m请选择您需要修改的信息>>：\033[0m')
          if update_attr in style.student_arrt:
              rank_name = style.student_arrt[update_attr]

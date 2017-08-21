@@ -231,7 +231,8 @@ class uptate_info():
         # 数据持久化到文件中
         db_operator.operator_db.fulsh_db(all_obj_info, obj_table)
         return new_obj
-# 更新学生信息
+
+    # 更新学生信息
     def update_student_obj(obj_table, rank_name, new_val, obj_info):
         # 读取所有信息
         all_obj_info = db_operator.operator_db.search_all_obj(obj_table)

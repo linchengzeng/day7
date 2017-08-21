@@ -33,14 +33,23 @@ class User_info_manage():
         if result:
             print('\033[30;1m修改成功！\033[0m')
 
+    # 个人信息修改
     def u_info_manage(self, obj_table):
         result = edit_obj_infomation.Editor_info.edit_student_obj(obj_table, self)
         return result
 
-
-
-    def c_info_manage(self):
+    # 课程管理修改
+    def c_info_manage(self, obj_table):
         print('user_manage_page.py line 30')
+        while True:
+            print(style.user_course_menu_desc)
+            user_course_operator = input('\033[31;1m请输入您需要的操作>>：\033[0m')
+            if user_course_operator in style.user_course_menu:
+                result = ''
+            else:
+                print('您的选择不在我们的服务范围，请重新选择！')
+            return result
+
 
     def last(self,obj_table):
         return main_master.main_page()

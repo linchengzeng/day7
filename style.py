@@ -99,18 +99,30 @@ student_arrt = {
 }
 
 school_menu_arrt = u'''
-    1:学校名称
-    2:学校地址
-    3:联系电话
+    1：学校名称
+    2：学校地址
+    3：联系电话
 '''
 
-course_menu_arrt = u'''
-    1:课程名称
-    2:课程周期
-    3:课程费用
+course_menu_arrt_desc = u'''
+    1：课程名称
+    2：课程周期
+    3：课程费用
 '''
 
-teacher_menu_arrt = u'''
+user_course_menu_desc = u'''
+    1：报名课程
+    2：查询目前所学课程
+    3：返回上级操作
+'''
+
+user_course_menu = {
+    '1': 'add_user_course',
+    '2': 'search_user_course',
+    '3': 'last',
+}
+
+teacher_menu_desc = u'''
     1：教师名称
     2：教师性别
     3：教师地址
@@ -120,14 +132,14 @@ teacher_menu_arrt = u'''
     7：教师所属学校
 '''
 
-classes_arrt_menu = u'''
+classes_menu_desc = u'''
     1：班级名称
     2：班级所属学校
     3：班级所授课程
     4：班级任课老师
 '''
 
-student_arrt_menu = u'''
+student_menu_desc = u'''
     1：学生姓名
     2：学生性别
     3：联系地址
