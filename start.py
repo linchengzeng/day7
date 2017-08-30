@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
 
-import sys, time, os, logging, main_master
+import sys, time, os, main_master
 
 
 if __name__ == '__main__':

@@ -1,16 +1,14 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
-import main_master
-import style
+import main_master, style, time, datetime
 from db_view import database_info,db_operator
 from information_operator import search_infomation
 from user_view import manage_page
 
 
-class Add_info(object):
+class Add_info():
 
     def add_obj(obj_table):
-        print()
         result = None
         if obj_table == 'school_manage':
             result = Add_info.add_school_obj(obj_table)
@@ -22,13 +20,14 @@ class Add_info(object):
             result = Add_info.add_student_obj(obj_table)
         elif obj_table == 'classes_manage':
             result = Add_info.add_classes(obj_table)
+
         if result == 'Fail':
             print('\033[31;1m此%s已存在,请检查后重新输入。 add_infomation.py line in 24\033[0m' % style.menu_dict[obj_table])
             print()
-            manage_page.manage_info(obj_table)
+            return manage_page.manage_info(obj_table)
         elif result == 'Success':
             print('\033[31;1m添加成功!\033[0m')
-            manage_page.manage_info(obj_table)
+            return manage_page.manage_info(obj_table)
 
     # 添加学校信息
     def add_school_obj(obj_table):
@@ -50,7 +49,7 @@ class Add_info(object):
         print('add_infomation:添加课程信息 line 43')
         print('\033[30;1m\n请先输入课程所属\033[0m\033[31;1m学校的ID\033[0m\033[30;1m，再输入课程的其他信息！\033[0m')
         school_id = input('请输入学校ID：')
-        school_obj = search_infomation.Search_info.search_id_in_table(school_id, 'school_manage')
+        school_obj = search_infomation.Search_info.search_id(school_id, 'school_manage')
         if school_obj == 'Fail':
             print('您输入的学校ID有误，请查询后再操作！')
             return main_master.manage_view
@@ -58,8 +57,8 @@ class Add_info(object):
             print('您将在\033[31;1m%s\033[0m下添加课程信息' % school_obj.School_Name)
         print('请输入以下课程信息：课程ID、课程名称、课程周期、课程价格')
         course_id = input('课程ID(唯一)：')
-        search_course_id_result = search_infomation.Search_info.search_id_in_table(course_id, obj_table)
-        if search_course_id_result != 'Fail':
+        search_course_id_result = search_infomation.Search_info.search_id(course_id, obj_table)
+        if search_course_id_result:
             print('\033[31;1m此课程ID已存在，请查询后再操作！\033[0m')
             return main_master.manage_view
         course_name = input('课程名称：')
@@ -77,17 +76,17 @@ class Add_info(object):
               '\033[31;1m学校的ID、授课教师的ID、所学课程ID\033[0m'
               '\033[30;1m，再输入其他相关信息！\033[0m')
         school_id = input('请输入学校ID：')
-        school_obj = search_infomation.Search_info.search_id_in_table(school_id, 'school_manage')
+        school_obj = search_infomation.Search_info.search_id(school_id, 'school_manage')
         if school_obj == 'Fail':
             print('您输入的学校ID有误，请查询后再操作！')
             return main_master.manage_view
         teacher_id = input('请输入任课教师的ID：')
-        teacher_obj = search_infomation.Search_info.search_id_in_table(teacher_id, 'teacher_manage')
+        teacher_obj = search_infomation.Search_info.search_id(teacher_id, 'teacher_manage')
         if teacher_obj == 'Fail':
             print('您输入的教师ID有误，请查询后再操作！')
             return main_master.manage_view
         course_id = input('请输入所教课程的ID：')
-        course_obj = search_infomation.Search_info.search_id_in_table(course_id, 'course_manage')
+        course_obj = search_infomation.Search_info.search_id(course_id, 'course_manage')
         if course_obj == 'Fail':
             print('您输入的课程ID有误，请查询后再操作！')
             return main_master.manage_view
@@ -95,7 +94,7 @@ class Add_info(object):
               % (school_obj.School_Name, teacher_obj.Teacher_name, course_obj.Course_name))
         print('请输入以下班级信息：班级ID（唯一）、班级名称')
         classes_id = input('班级ID（唯一）：')
-        search_classes_id = search_infomation.Search_info.search_id_in_table(classes_id, 'classes_manage')
+        search_classes_id = search_infomation.Search_info.search(classes_id, 'classes_manage')
         if search_classes_id != 'Fail':
             print('\033[30;1m您输入的班级ID已存在，请查询后再操作！\033[0m')
             return main_master.manage_view
@@ -104,14 +103,11 @@ class Add_info(object):
         result = db_operator.operator_db.add_obj_to_db(classes_obj, 'classes_manage')
         return result
 
-
-
-
     # 添加教师信息
     def add_teacher_obj(obj_table):
         print('\n\033[30;1m请先输入教师所属\033[0m\033[31;1m学校的ID\033[0m\033[30;1m，再输入教师的其他信息！\033[0m')
         school_id = input('请输入学校ID：')
-        school_obj = search_infomation.Search_info.search_id_in_table(school_id, 'school_manage')
+        school_obj = search_infomation.Search_info.search_id(school_id, 'school_manage')
         if school_obj == 'Fail':
             print('您输入的学校ID有误，请查询后再操作！')
             return main_master.manage_view
@@ -119,7 +115,7 @@ class Add_info(object):
             print(school_obj.School_Name)
         print('\033[31;1m请输入以下内容：教师ID、教师姓名、性别、住址、年龄、联系电话、月薪\033[0m')
         teacher_id = input('教师ID(唯一)：')
-        search_teacher_id_result = search_infomation.Search_info.search_id_in_table(teacher_id, obj_table)
+        search_teacher_id_result = search_infomation.Search_info.search_id(teacher_id, obj_table)
         if search_teacher_id_result != 'Fail':
             print('\033[31;1m此教师ID已存在，请查询后再操作！\033[0m')
             return main_master.manage_view
@@ -138,12 +134,12 @@ class Add_info(object):
     def add_student_obj(obj_table):
         print('创建学员时需先选择学校、关联班级后再添加学员信息！')
         school_id = input('请输入学员所在学校：')
-        school_obj = db_operator.operator_db.search_id_in_db(school_id, 'school_manage')
+        school_obj = search_infomation.Search_info.search_id(school_id, 'school_manage')
         if school_obj == 'Fail':
             print('您输入的学校ID有误，请查询后再操作！')
             return main_master.manage_view
         classes_id = input('请输入班级ID：')
-        classes_obj = db_operator.operator_db.search_id_in_db(classes_id, 'classes_manage')
+        classes_obj = search_infomation.Search_info.search_id(classes_id, 'classes_manage')
         if classes_obj == 'Fail':
             print()
         print('请输入以下内容：学员ID（唯一）、姓名、性别、住址、年龄、联系电话')
@@ -159,3 +155,18 @@ class Add_info(object):
                                         classes_obj, stu_balance)
         result = db_operator.operator_db.add_obj_to_db(add_stu, obj_table)
         return result
+
+    # 添加购买课程信息
+    def add_buy_course(self, db_table, buy_obj):
+        print('************目前所开课程有************')
+        search_infomation.Search_info.search_all_obj(buy_obj)
+        user_buy_course_id = input('\033[31;1m请输入您需要购买的课程ID：\033[0m')
+        # 获取课程对象
+        course_obj = search_infomation.Search_info.search_id(user_buy_course_id, buy_obj)
+        if course_obj:
+            obj_val = [self, course_obj, datetime.date.fromtimestamp(time.time())]
+            print('add_infomation.py line 168')
+            print(obj_val)
+            db_operator.operator_db.add_obj_to_db(obj_val, db_table)
+        else:
+            print('\033[30;1m您输入的课程ID不存在，请查询后再操作！\033[0m')

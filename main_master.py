@@ -26,6 +26,8 @@ def authentication(auth_val):
                         user_data['account_data'] = auth_result
                         print('欢迎\033[31;1m%s\033[0m回来' % user_data['account_data'].Stu_name)
                         func(args, kwargs)
+                    else:
+                        print('\033[30;1mID或密码错误，请重新输入!\033[0m')
                 elif auth_val == 'teacher_view':
                     auth_result = auth_info.Auth_user_info.auth_login_info(uid, pwd, 'teacher_manage')
                     if auth_result:
@@ -34,6 +36,8 @@ def authentication(auth_val):
                         user_data['account_data'] = auth_result
                         print('欢迎%s回来' % user_data['account_data'].Teacher_name)
                         func(args, kwargs)
+                    else:
+                        print('\033[30;1mID或密码错误，请重新输入!\033[0m')
                 elif auth_val =='manage_view':
                     print('实现认证装饰manage_view')
                     func(args, kwargs)
@@ -78,6 +82,7 @@ def logout():
 
 def main_page(*args, **kwargs):
     print(style.menu)
+
     menu_dict = {
         '1': student_view,
         '2': teacher_view,

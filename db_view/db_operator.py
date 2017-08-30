@@ -15,7 +15,7 @@ class operator_db(object):
                 pickle.dump(old_text,new_fp)
             return 'Success'
         except (EOFError,FileNotFoundError):
-            print('这是空文件导致需要执行此处')
+            # print('这是空文件导致需要执行此处')
             with open(db_file, 'wb') as new_fp:
                 pickle.dump([obj_val], new_fp)
             return 'Success'
@@ -38,16 +38,13 @@ class operator_db(object):
 
     def search_all_obj(obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
-        with open(db_file, 'rb+') as table_obj:
-            try:
+        try:
+            with open(db_file, 'rb+') as table_obj:
                 table_info = pickle.load(table_obj)
-            except:
-                return 'Fail'
-        result = []
-        for line in table_info:
-            result.append(line)
-        if len(result) != 0:
-            return result
+        except:
+            return 'Fail'
+        if len(table_info) != 0:
+            return table_info
         else:
             return 'Fail'
 

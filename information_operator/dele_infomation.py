@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
 
-from information_operator import auth_info
 from db_view import db_operator
 import main_master, time
 

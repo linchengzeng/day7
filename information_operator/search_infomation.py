@@ -6,8 +6,6 @@ BASE_FILE = setting.BASE_PATH
 
 class Search_info():
 
-
-
     def search_all_obj(db_table):
         '''
         :param obj_id:数据ID
@@ -16,9 +14,8 @@ class Search_info():
         '''
         search_obj_list = db_operator.operator_db.search_all_obj(db_table)
         if search_obj_list == 'Fail':
-            print('查谗失败或数据为空！请联系管理员！')
+            print('查询失败或数据为空！请联系管理员！')
         else:
-            print('********查询结果*********')
             if db_table == 'school_manage':
                 for school_obj_info in search_obj_list:
                     print('************************')
@@ -64,4 +61,9 @@ class Search_info():
                     print('班级名称：%s' % classes_obj_info.Class_Name)
                     print('所教课程：%s' % classes_obj_info.Class_Course.Course_name)
                     print('任课讲师：%s' % classes_obj_info.Class_Teacher.Teacher_name)
-            print('**********查询结束**********')
+            elif db_table == 'user_course_manage':
+                return search_obj_list
+
+    def search_id(obj_id, obj_db_table):
+        search_db_result = db_operator.operator_db.search_id_in_db(obj_id, obj_db_table)
+        return search_db_result
