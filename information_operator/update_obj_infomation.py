@@ -60,6 +60,39 @@ class Uptate_info(object):
         search_obj.fulsh_db(all_obj_info, obj_table)
         return new_obj
 
+    # 执行更新课程信息
+    def updata_classes_info(self, obj_info, rank_name, new_val, obj_table):
+        search_obj = Operator_db()
+        # 读取所有信息
+        all_obj_info = search_obj.search_all_obj(obj_table)
+        for line in all_obj_info:
+            # 判断是本次需要修改的信息ID时进行删除
+            if obj_info.ID == line.ID:
+                all_obj_info.remove(line)
+        # 新建一个新的对象，并将新的值写入新对象
+        if rank_name == 'Class_Name':
+            # 改班级名称
+            new_obj = database_info.Classes(obj_info.ID, new_val, obj_info.Class_School, obj_info.Class_Course,
+                                           obj_info.Class_Teacher)
+        elif rank_name == 'Class_School':
+            # 改班级所属学校
+            # new_obj = database_info.Classes(obj_info.ID, obj_info.Course_name, new_val, obj_info.Course_cost,
+            #                                obj_info.Course_School)
+            print('\033[30;1m暂未开放此功能！\033[0m')
+            new_obj = obj_info
+        elif rank_name == 'Course_Cost':
+            # 改电话
+            # new_obj = database_info.Classes(obj_info.ID, obj_info.Course_name, obj_info.Course_period, new_val,
+            #                                obj_info.Course_School)
+            print('\033[30;1m暂未开放此功能！\033[0m')
+            new_obj = obj_info
+        # 将更新后的对象添加到原来的数据库表中
+        all_obj_info.append(new_obj)
+        # 数据持久化到文件中
+        search_obj.fulsh_db(all_obj_info, obj_table)
+        return new_obj
+
+
     # 执行更新教师信息
     def update_teacher_info(self, obj_info, ID, rank_name, new_val, obj_table):
         search_obj = Operator_db()
@@ -95,6 +128,11 @@ class Uptate_info(object):
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_pwd, obj_info.Teacher_name,
                                             obj_info.Teacher_sex, obj_info.Teacher_addr, obj_info.Teacher_age, new_val,
                                             obj_info.Super_manage, obj_info.Teacher_salary, obj_info.Teacher_School)
+        elif rank_name == 'Super_manage':
+            # 更改超级管理权限
+            new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_pwd, obj_info.Teacher_name,
+                                            obj_info.Teacher_sex, obj_info.Teacher_addr, obj_info.Teacher_age,
+                                            obj_info.Teacher_tell,new_val, obj_info.Teacher_salary, obj_info.Teacher_School)
         elif rank_name == 'Teacher_salary':
             # 改工资
             new_obj = database_info.Teacher(obj_info.ID, obj_info.Teacher_pwd, obj_info.Teacher_name,

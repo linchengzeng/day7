@@ -33,7 +33,7 @@ class Main_page(object):
         # 用户选的是添加、修改、删除、查询、返回上级等操作
         option_select = input('\033[31;1m请选择您需要的操作>>：\033[0m')
         if option_select in option_menu_dict:
-            option_menu_dict[option_select](self, user_select_menu)
+            option_menu_dict[option_select]( user_select_menu)
 
 
     def last(self):

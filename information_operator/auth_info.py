@@ -11,11 +11,11 @@ class Auth_user_info(object):
         search_obj = Operator_db()
         search_result = search_obj.search_id_in_db(user_id, obj_in_table)
         if search_result:
-            if obj_in_table == 'studeng_manage':
+            if obj_in_table == 'student_manage':
                 if search_result.Pwd == user_pwd:
                     return search_result
             elif obj_in_table == 'teacher_manage':
-                if search_result.Teacher_pwd == None:
+                if search_result.Teacher_pwd == user_pwd:
                     return search_result
         else:
             print('\033[31;1m用户ID或密码错误\033[0m')

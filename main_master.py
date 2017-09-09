@@ -4,7 +4,7 @@ import style
 from information_operator.auth_info import Auth_user_info
 from user_view.stu_manage_page import User_info_manage
 from teacher_view.teacher_main_page import Teacher_info_manage
-from user_view import manage_page
+from user_view.manage_page import Main_page
 
 user_data = {
     'account_id': None,
@@ -22,7 +22,6 @@ def authentication(auth_val):
                 uid = input('请输入您的ID>>：').strip()
                 pwd = input('请输入您的密码>>：').strip()
                 if auth_val == 'student_view':
-
                     auth_result = user_auth.auth_login_info(uid, pwd, 'student_manage')
                     if auth_result:
                         user_data['account_id'] = uid
@@ -43,8 +42,16 @@ def authentication(auth_val):
                     else:
                         print('\033[30;1mID或密码错误，请重新输入!\033[0m')
                 elif auth_val =='manage_view':
-                    print('实现认证装饰manage_view')
-                    func(args, kwargs)
+                    auth_result = user_auth.auth_login_info(uid, pwd, 'teacher_manage')
+                    # if auth_result and auth_result.Super_manage == '1':
+                    if auth_result:
+                        user_data['account_id'] = uid
+                        user_data['is_authenticated'] = True
+                        user_data['account_data'] = auth_result
+                        print('欢迎\033[31;1m%s\033[0m回来' % user_data['account_data'].Teacher_name)
+                        func(args, kwargs)
+                    else:
+                        print('\033[30;1mID或密码错误，请重新输入!\033[0m')
                 elif auth_val == 'classes_view':
                     print('实现认证装饰classes_view')
                     func(args, kwargs)
@@ -76,7 +83,8 @@ def manage_view(self, *args,**kwargs):
         if user_select_menu in style.menu_num_dict:
             if user_select_menu == '6':
                 return main_page()
-            manage_page.manage_info(self, style.menu_num_dict[user_select_menu])
+            manage_main_page = Main_page()
+            manage_main_page.manage_info(style.menu_num_dict[user_select_menu])
 
 def logout():
     print('本次使用结束，欢迎您再次使用本系统!')

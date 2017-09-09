@@ -43,7 +43,7 @@ class Editor_info(object):
             rank_val = style.school_attr[update_attr]
             try:
                 # 执行更新学校信息操作
-                new_obj_info = updata_obj.update_school_info(obj_table, rank_val, new_val, obj_info)
+                new_obj_info = updata_obj.update_school_info(obj_info, obj_info.ID, rank_val, new_val, obj_table)
                 # 输出更新后的信息
                 print('》》》》更新完成，更新后的信息为》》》》')
                 print('学校ID（唯一）：%s' % new_obj_info.ID)
@@ -97,6 +97,10 @@ class Editor_info(object):
         print('教师地址：%s' % old_obj_info.Teacher_addr)
         print('教师年龄：%s' % old_obj_info.Teacher_age)
         print('教师电话：%s' % old_obj_info.Teacher_tell)
+        if old_obj_info.Super_manage == '1':
+            print('超级管理员：是')
+        else:
+            print('超级管理员：否')
         print('教师工资：%s' % old_obj_info.Teacher_salary)
         print('教师所属学校：%s' % old_obj_info.Teacher_School.School_Name)
         print('*********************')
@@ -117,7 +121,7 @@ class Editor_info(object):
             try:
                 rank_name = style.teacher_arrt[update_attr]
                 print('\033[30;1m更新中，请稍侯！！！\033[0m')
-                new_teacher_info = updata_obj.update_teacher_info(obj_table, rank_name, new_val, old_obj_info)
+                new_teacher_info = updata_obj.update_teacher_info(old_obj_info,old_obj_info.ID, rank_name, new_val,obj_table )
                 # 输出更新后的信息
                 time.sleep(1)
                 print('\033[30;1m》》》》更新完成，更新后的信息为》》》》\033[0m')
@@ -177,7 +181,7 @@ class Editor_info(object):
                 try:
                     rank_name = style.classes_arrt[update_attr]
                     print('\033[30;1m更新中，请稍侯！！！\033[0m')
-                    new_classes_info = updata_obj.updata_classes_info(obj_table, rank_name, new_val, old_obj_info)
+                    new_classes_info = updata_obj.updata_classes_info(old_obj_info, rank_name, new_val, obj_table)
                     # 输出更新后的信息
                     time.sleep(1)
                     print('\033[30;1m》》》》更新完成，更新后的信息为》》》》\033[0m')

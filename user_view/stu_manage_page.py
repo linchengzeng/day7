@@ -39,12 +39,12 @@ class User_info_manage(object):
         edit_obj = Editor_info()
         result = edit_obj.edit_student_obj(obj_table, self)
         # 更新缓存中登录后的信息
-        self['account_data'] = result
+        main_master.user_data['account_data'] = result
         return result
 
     # 课程管理修改
     def c_info_manage(self, obj_table):
-        print('stu_manage_page.py line 30')
+        # print('stu_manage_page.py line 30')
         user_course = {
             '1': User_info_manage.add_user_course,
             '2': User_info_manage.search_user_course,
@@ -65,8 +65,9 @@ class User_info_manage(object):
         from information_operator import add_infomation
         add_infomation.Add_obj_info.add_buy_course(self, db_table, buy_obj)
 
+    # 学生购买课程
     def search_user_course(self, db_table, *args, **kwargs):
-        print('stu_manage_page.py line 62')
+        # print('stu_manage_page.py line 62')
         search_obj = Search_info()
         search_user_buy_course_result = search_obj.search_all_obj(db_table)
         print('\033[30;1m您购买的课程如下\033[0m')

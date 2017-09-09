@@ -35,16 +35,16 @@ class Teacher_info_manage(object):
             print('\033[30;1m更新成功！\033[0m')
 
     # 更新用户信息
-    def teacher_u_info_manage(self, user_data, db_table):
+    def teacher_u_info_manage(self, user_info, db_table):
         edit_obj = Editor_info()
-        result = edit_obj.edit_teacher_info(db_table, self)
+        result = edit_obj.edit_teacher_info(db_table, user_info)
         # 更新缓存中登录后的信息
-        self['account_data'] = result
+        main_master.user_data['account_data'] = result
         return result
 
     # 更新教师授课信息
     def teacher_c_info_manage(self, user_data, db_table):
-        print('teacher_main_page.py line 30')
+        # print('teacher_main_page.py line 30')
         teacher_course_manage_menu = {
             '1': Teacher_info_manage.add_user_course,
             '2': Teacher_info_manage.search_user_course,
@@ -57,20 +57,20 @@ class Teacher_info_manage(object):
             if user_course_operator in style.user_course_menu:
                 result = teacher_course_manage_menu[user_course_operator](self, user_data, 'classes_manage')
             else:
-                print('您的选择不在我们的服务范围，请重新选择！')
+                print('\033[30;1m您的选择不在我们的服务范围，请重新选择！\033[0m')
             return result
 
     # 添加课程信息
     def add_user_course(self, user_data, db_table, *args, **kwargs):
-        print('teacher_main_page.py in line 61')
+        # print('teacher_main_page.py in line 61')
         print('\033[30;1m教师的课程添加即为班级的开设，请悉知！\033[0m')
         add_classes = Add_obj_info()
         add_classes.add_classes(db_table)
 
-    # 修改课程信息
+    # 查询所授课程信息
     def search_user_course(self, user_data, db_table, *args, **kwargs):
-        print('teacher_main_page.py in line 64')
-        print('\033[30;1m教师的课程修改即为班级的修改，请悉知！\033[0m')
+        # print('teacher_main_page.py in line 64')
+        # print('\033[30;1m教师的课程修改即为班级的修改，请悉知！\033[0m')
         update_class_obj = Update_teach_course_info()
         update_class_obj.update_t_c_info(user_data)
 

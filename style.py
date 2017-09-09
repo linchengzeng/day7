@@ -77,8 +77,9 @@ teacher_arrt = {
     '3': 'Teacher_addr',
     '4': 'Teacher_age',
     '5': 'Teacher_tell',
-    '6': 'Teacher_salary',
-    '7': 'Teacher_School'
+    '6': 'Super_manage',
+    '7': 'Teacher_salary',
+    '8': 'Teacher_School'
 }
 
 classes_arrt = {
@@ -134,8 +135,9 @@ teacher_menu_desc = u'''
     3：教师地址
     4：教师年龄
     5：教师电话
-    6：教师工资
-    7：教师所属学校
+    6：超级管理权限
+    7：教师工资
+    8：教师所属学校
 '''
 
 classes_menu_desc = u'''
