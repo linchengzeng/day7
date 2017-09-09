@@ -50,24 +50,28 @@ class Course():
         self.Course_cost = course_cost
         self.Course_School = School
 
-class Teacher():
-    def __init__(self, ID, teacher_name, teacher_sex, teacher_addr, teacher_age, teacher_tel, teacher_salary, School):
+class Teacher(object):
+    def __init__(self, ID, teacher_pwd, teacher_name, teacher_sex, teacher_addr, teacher_age, teacher_tel, super_manage, teacher_salary, School):
         '''
         :param ID: 教师ID（唯一）
+        :param teacher_pwd:密码
         :param teacher_name: 教师名称
         :param teacher_sex: 教师性别
         :param teacher_addr: 教师地址
         :param teacher_age: 教师年龄
         :param teacher_tel: 教师电话
+        :param super_manage:超级管理权限
         :param teacher_salary: 教师工资
         :param School: 教师所属学校
         '''
         self.ID =ID
+        self.Teacher_pwd = teacher_pwd
         self.Teacher_name = teacher_name
         self.Teacher_sex = teacher_sex
         self.Teacher_addr = teacher_addr
         self.Teacher_age = teacher_age
         self.Teacher_tell = teacher_tel
+        self.Super_manage = super_manage
         self.Teacher_salary = teacher_salary
         self.Teacher_School = School   #老师所属学校
         # self.Teach_Cour = Course   #老师所教科目

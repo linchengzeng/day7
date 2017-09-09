@@ -1,33 +1,35 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
 # 更新前后的学校信息
-from db_view import db_operator
-from information_operator import update_obj_infomation
+from db_view.db_operator import Operator_db
+from information_operator.update_obj_infomation import Uptate_info
 import style, main_master, time
 
-class Editor_info():
+class Editor_info(object):
 
-    def edit_obj_info(obj_table):
+    def edit_obj_info(self, obj_table):
         print('\033[30;1m您现在操作的是修改%s信息\033[0m' % style.menu_dict[obj_table])
         edit_obj_id = input('\033[31;1m请输入您需要修改的%s的ID>>：\033[0m' % style.menu_dict[obj_table])
         # 查询此ID是否存在
-        old_obj_info = db_operator.operator_db.search_id_in_db(edit_obj_id, obj_table)
+        data_operator = Operator_db()
+        old_obj_info = data_operator.search_id_in_db(edit_obj_id, obj_table)
         if old_obj_info == 'Fail':
             print('无法找到此信息，请确认后重新修改！')
         else:
             if obj_table == 'school_manage':
-                Editor_info.editor_school_obj(obj_table, old_obj_info)
+                Editor_info.editor_school_obj(self, obj_table, old_obj_info)
             elif obj_table == 'teacher_manage':
-                Editor_info.edit_teacher_info(obj_table, old_obj_info)
+                Editor_info.edit_teacher_info(self, obj_table, old_obj_info)
             elif obj_table == 'course_manage':
-                Editor_info.editor_course_obj(obj_table, old_obj_info)
+                Editor_info.editor_course_obj(self, obj_table, old_obj_info)
             elif obj_table == 'student_manage':
-                Editor_info.edit_student_obj(obj_table, old_obj_info)
+                Editor_info.edit_student_obj(self, obj_table, old_obj_info)
             elif obj_table == 'classes_manage':
-                Editor_info.editor_classes_info(obj_table, old_obj_info)
+                Editor_info.editor_classes_info(self, obj_table, old_obj_info)
         return main_master.manage_view
 
-    def editor_school_obj(obj_table, obj_info):
+    def editor_school_obj(self, obj_table, obj_info):
+        updata_obj = Uptate_info()
         # 输出原始信息
         print('学校ID（唯一）：%s'%obj_info.ID)
         print('学校名称：%s'%obj_info.School_Name)
@@ -35,13 +37,13 @@ class Editor_info():
         print('联系电话：%s'%obj_info.School_Tel)
         print('*******************')
         print(style.school_menu_arrt)
-        update_attr = input('\033[31;1m请输入您需要修改的信息\033[0m')
+        update_attr = input('\033[31;1m请输入您需要修改的信息>>：\033[0m')
         if update_attr in style.school_attr:
             new_val = input('\033[31;1m请输入新值>>：\033[0m')
             rank_val = style.school_attr[update_attr]
             try:
                 # 执行更新学校信息操作
-                new_obj_info = update_obj_infomation.uptate_info.update_school_info(obj_table, rank_val, new_val, obj_info)
+                new_obj_info = updata_obj.update_school_info(obj_table, rank_val, new_val, obj_info)
                 # 输出更新后的信息
                 print('》》》》更新完成，更新后的信息为》》》》')
                 print('学校ID（唯一）：%s' % new_obj_info.ID)
@@ -53,7 +55,8 @@ class Editor_info():
                 print('系统异常，更新信息失败，请联系管理员！')
 
     # 更新前后的课程信息
-    def editor_course_obj(obj_table, obj_info):
+    def editor_course_obj(self, obj_table, obj_info):
+        updata_obj = Uptate_info()
         # 输出原始信息
         print('课程ID（唯一）：%s'%obj_info.ID)
         print('课程名称：%s'%obj_info.Course_name)
@@ -69,8 +72,7 @@ class Editor_info():
             rank_name = style.course_attr[update_attr]
             try:
                 # 执行更新操作
-                new_course_info = update_obj_infomation.uptate_info.update_course_info(obj_table,
-                                                                                       rank_name, new_val, obj_info)
+                new_course_info = updata_obj.update_course_info(obj_info, rank_name, new_val, obj_table)
                 # 输出更新后的信息
                 print('》》》》更新完成，更新后的信息为》》》》')
                 print('课程ID（唯一）：%s' % new_course_info.ID)
@@ -84,7 +86,9 @@ class Editor_info():
                 print('系统异常，更新信息失败，请联系管理员！')
 
     # 更新前后的教师信息
-    def edit_teacher_info(obj_table, old_obj_info):
+    def edit_teacher_info(self, obj_table, old_obj_info):
+        data_operator = Operator_db()
+        updata_obj = Uptate_info()
         # 输出原始信息
         print('\033[30;1m******讲师原始信息******\033[0m')
         print('教师ID（唯一）：%s' % old_obj_info.ID)
@@ -103,7 +107,7 @@ class Editor_info():
             if update_attr == '7':
                 print('修改教师所属学校 update_obj_infomation.py line 120')
                 new_school_id = input('请输入新的学校ID>>：')
-                new_val = db_operator.operator_db.search_id_in_db(new_school_id, 'school_manage')
+                new_val = data_operator.search_id_in_db(new_school_id, 'school_manage')
                 if new_val == 'Fail':
                     print('\033[30;1m没有找到学校ID，请查询后再操作！\033[0m')
                     return None
@@ -113,8 +117,7 @@ class Editor_info():
             try:
                 rank_name = style.teacher_arrt[update_attr]
                 print('\033[30;1m更新中，请稍侯！！！\033[0m')
-                new_teacher_info = update_obj_infomation.uptate_info.update_teacher_info(obj_table, rank_name,
-                                                                                         new_val, old_obj_info)
+                new_teacher_info = updata_obj.update_teacher_info(obj_table, rank_name, new_val, old_obj_info)
                 # 输出更新后的信息
                 time.sleep(1)
                 print('\033[30;1m》》》》更新完成，更新后的信息为》》》》\033[0m')
@@ -129,12 +132,9 @@ class Editor_info():
             except EOFError:
                 print('系统异常，更新信息失败，请联系管理员！')
 
-    def editor_classes_info(obj_table, old_obj_info):
-        print('\033[30;1m您现在操作的是修改%s信息\033[0m' % style.menu_dict[obj_table])
-        edit_obj_id = input('\033[31;1m请输入您需要修改的%s的ID>>：\033[0m' % style.menu_dict[obj_table])
-        # 查询此ID是否存在
-        old_obj_info = db_operator.operator_db.search_id_in_db(edit_obj_id, obj_table)
-
+    def editor_classes_info(self, obj_table, old_obj_info):
+        data_operator = Operator_db()
+        updata_obj = Uptate_info()
         if old_obj_info == 'Fail':
             print('无法找到此信息，请确认后重新修改！')
         else:
@@ -156,28 +156,28 @@ class Editor_info():
                 # 修改班级所属学校ID
                 elif update_attr == '2':
                     new_school_id = input('请输入新的学校ID>>：')
-                    new_val = db_operator.operator_db.search_id_in_db(new_school_id, 'school_manage')
+                    new_val = data_operator.search_id_in_db(new_school_id, 'school_manage')
                     if new_val == 'Fail':
                         print('\033[30;1m没有找到新的学校ID，请查询后再操作！\033[0m')
                         return main_master.manage_view
                 # 修改班级所学课程
                 elif update_attr == '3':
                     new_course_id = input('请输入新的课程ID>>：')
-                    new_val = db_operator.operator_db.search_id_in_db(new_course_id, 'course_manage')
+                    new_val = data_operator.search_id_in_db(new_course_id, 'course_manage')
                     if new_val == 'Fail':
                         print('\033[30;1m没有找到新的课程ID，请查询后再操作！\033[0m')
                         return main_master.manage_view
                 # 修改班级授课教师
                 elif update_attr == '4':
                     new_teacher_id = input('请输入新的授课教师ID>>：')
-                    new_val = db_operator.operator_db.search_id_in_db(new_teacher_id, 'teacher_manage')
+                    new_val = data_operator.search_id_in_db(new_teacher_id, 'teacher_manage')
                     if new_val == 'Fail':
                         print('\033[30;1m没有找到新的授课教师ID，请查询后再操作！\033[0m')
                         return main_master.manage_view
                 try:
                     rank_name = style.classes_arrt[update_attr]
                     print('\033[30;1m更新中，请稍侯！！！\033[0m')
-                    new_classes_info = update_obj_infomation.uptate_info.updata_classes_info(obj_table, rank_name, new_val, old_obj_info)
+                    new_classes_info = updata_obj.updata_classes_info(obj_table, rank_name, new_val, old_obj_info)
                     # 输出更新后的信息
                     time.sleep(1)
                     print('\033[30;1m》》》》更新完成，更新后的信息为》》》》\033[0m')
@@ -189,9 +189,11 @@ class Editor_info():
                     print('*********************')
                 except EOFError:
                     print('系统异常，更新信息失败，请联系管理员！')
-        return main_master.manage_view
+
     # 更新学生信息
-    def edit_student_obj(obj_table, old_obj_info):
+    def edit_student_obj(self, obj_table, old_obj_info):
+         data_operator = Operator_db()
+         updata_obj = Uptate_info()
          # 输出原始信息
          print('\033[30;1m******学生原始信息******\033[0m')
          print('学生ID（唯一)：%s' % old_obj_info.ID)
@@ -210,16 +212,16 @@ class Editor_info():
              rank_name = style.student_arrt[update_attr]
              new_val = input('请输入新值>>：')
              if update_attr == '6':
-                 new_val = db_operator.operator_db.search_id_in_db(new_val, 'school_manage')
+                 new_val = data_operator.search_id_in_db(new_val, 'school_manage')
              elif update_attr == '7':
-                 new_val = db_operator.operator_db.search_id_in_db(new_val, 'classes_manage')
+                 new_val = data_operator.search_id_in_db(new_val, 'classes_manage')
              # if new_val == 'Fail':
              #     print('无法找到对象！请查询后再操作！')
              #     return None
              try:
                  print('更新中，请稍侯！！！')
                  time.sleep(1)
-                 new_student_obj = update_obj_infomation.uptate_info.update_student_obj(obj_table, rank_name, new_val, old_obj_info)
+                 new_student_obj = updata_obj.update_student_obj(obj_table, rank_name, new_val, old_obj_info)
                  print('更新完成，以下为更新后的信息')
                  print('学生ID（唯一)：%s' % new_student_obj.ID)
                  print('姓名：%s' % new_student_obj.Stu_name)

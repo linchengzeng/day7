@@ -4,8 +4,8 @@ import pickle,setting
 
 BASE_PATH = setting.BASE_PATH
 
-class operator_db(object):
-    def add_obj_to_db(obj_val, obj_db_table):
+class Operator_db(object):
+    def add_obj_to_db(self, obj_val, obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
         try:
             with open(db_file, 'rb+') as table_obj:
@@ -20,7 +20,7 @@ class operator_db(object):
                 pickle.dump([obj_val], new_fp)
             return 'Success'
 
-    def search_id_in_db(obj_id, obj_db_table):
+    def search_id_in_db(self, obj_id, obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
         try:
             with open(db_file, 'rb+') as table_obj:
@@ -36,7 +36,7 @@ class operator_db(object):
             return None
         return result
 
-    def search_all_obj(obj_db_table):
+    def search_all_obj(self, obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
         try:
             with open(db_file, 'rb+') as table_obj:
@@ -48,7 +48,7 @@ class operator_db(object):
         else:
             return 'Fail'
 
-    def fulsh_db(obj_val_all, obj_db_table):
+    def fulsh_db(self, obj_val_all, obj_db_table):
         db_file = BASE_PATH + '\db_files\\' + obj_db_table + '.db'
         with open(db_file, 'wb') as new_fp:
             pickle.dump(obj_val_all,new_fp)

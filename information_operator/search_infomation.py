@@ -1,18 +1,19 @@
 # -*- coding:utf-8 -*-
 #  Author:aling
 import setting
-from db_view import db_operator
+from db_view.db_operator import Operator_db
 BASE_FILE = setting.BASE_PATH
 
-class Search_info():
+class Search_info(object):
 
-    def search_all_obj(db_table):
+    def search_all_obj(self,db_table):
         '''
         :param obj_id:数据ID
         :param db_table:表名
         :return:
         '''
-        search_obj_list = db_operator.operator_db.search_all_obj(db_table)
+        search_obj = Operator_db()
+        search_obj_list = search_obj.search_all_obj(db_table)
         if search_obj_list == 'Fail':
             print('查询失败或数据为空！请联系管理员！')
         else:
@@ -64,6 +65,7 @@ class Search_info():
             elif db_table == 'user_course_manage':
                 return search_obj_list
 
-    def search_id(obj_id, obj_db_table):
-        search_db_result = db_operator.operator_db.search_id_in_db(obj_id, obj_db_table)
+    def search_id(self, obj_id, obj_db_table):
+        search_obj = Operator_db()
+        search_db_result = search_obj.search_id_in_db(obj_id, obj_db_table)
         return search_db_result

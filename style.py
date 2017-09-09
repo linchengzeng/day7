@@ -14,14 +14,14 @@ user_view_menu_desc = u'''
     1：修改密码
     2：个人信息管理
     3：课程管理
-    4：返回上级操作
+    4：退出登录
 '''
 
 user_view_menu = {
     '1': 'edit_pwd',
     '2': 'u_info_manage',
     '3': 'c_info_manage',
-    '4': 'last'
+    '4': 'logout'
 }
 
 menu_dict = {
@@ -113,6 +113,12 @@ course_menu_arrt_desc = u'''
 user_course_menu_desc = u'''
     1：报名课程
     2：查询目前所学课程
+    3：返回上级操作
+'''
+
+teacher_course_menu_desc = u'''
+    1：添加授课课程
+    2：查询目前所授课程
     3：返回上级操作
 '''
 

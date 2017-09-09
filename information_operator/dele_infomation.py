@@ -11,7 +11,7 @@ class Dele_obj_info():
         # 用于标记对象存在数据库中
         del_obj_id_flag = True
         # 读取所有信息
-        all_obj_info = db_operator.operator_db.search_all_obj(obj_table)
+        all_obj_info = db_operator.Operator_db.search_all_obj(obj_table)
         del_obj_id = input('\033[31;1m请输入您要删除的ID>>：\033[0m')
         try:
             for line in all_obj_info:
@@ -22,7 +22,7 @@ class Dele_obj_info():
                     time.sleep(0.6)
                     print('\033[30;1m删除成功！\033[0m')
                     # 使用pickle方式将数据持久化到文件中
-                    db_operator.operator_db.fulsh_db(all_obj_info, obj_table)
+                    db_operator.Operator_db.fulsh_db(all_obj_info, obj_table)
                     # time.sleep(0.6)是装饰用，无任何实际意义
                     time.sleep(0.6)
                     print('\033[30;1m数据更新成功！\033[0m')
